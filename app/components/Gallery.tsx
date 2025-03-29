@@ -1,4 +1,5 @@
 
+import { useEffect, useRef } from 'react';
 import Image from 'next/image'
 
 // type def for image
@@ -16,7 +17,7 @@ type ImageType = {
       id: 1,
       imageSrc: '/images/DSCF0095.jpeg',
       name: 'YSL Garden',
-      location: 'Hawaii',
+      location: 'Merrekesh',
       date: '06.02.2025',
       vertical: false
 
@@ -25,21 +26,37 @@ type ImageType = {
       id: 2,
       imageSrc: '/images/DSCF1365.jpeg',
       name: 'Garden',
-      location: 'Barcelona,Spain',
+      location: 'Barcelona',
       date: '09.03.2025',
       vertical: true
     },
+    {
+      id: 3,
+      imageSrc: '/images/DSCF0595.jpeg',
+      name: 'Alley',
+      location: 'Fes',
+      date: '16.02.2025',
+      vertical: true
+    },
+    {
+      id: 4,
+      imageSrc: '/images/DSCF0602.jpeg',
+      name: 'Hospital',
+      location: 'Fes',
+      date: '16.02.2025',
+      vertical: false
+    },
+    
   ]
 
   const albums: string[] = ["Morocco", "Spain"]
 
   export default function Gallery() {
     return (
-      <div className="overflow-hidden max-w-[850px] h-[340px] bg-[#f2f2f2] p-3 rounded-lg shadow">
-        <div className="flex flex-nowrap  h-[250px]  gap-2 bg-black overflow-x-auto">
-            {/* <div className="h-[275px] w-[6px] bg-[#E86A33] flex-shrink-0" /> */}
+      <div className="overflow-hidden max-w-[850px] h-[340px] bg-[#f2f2f2] px-1 py-3 rounded-lg shadow">
+        <div className="flex flex-nowrap  h-[250px]  gap-1 overflow-x-auto no-scrollbar">
           {images.map((img) => (
-            <div key={img.id} className="flex items-center justify-center flex-none">
+            <div key={img.id} className="relative group flex items-center justify-center flex-none">
               <Image
                 src={img.imageSrc}
                 alt={img.name}
@@ -47,6 +64,18 @@ type ImageType = {
                 width={img.vertical ? 167 :  375 } // keeps layout stable
                 style={{ objectFit: 'cover' }}
               />
+              {/* Hover Overlay */}
+              <div   
+              className={`absolute top-0 left-0 h-[250px] border-2 border-[#263A29] ${
+              img.vertical ? 'w-[167px]' : 'w-[375px]'} flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+              
+              style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
+                >
+                <p className="text-[#F2E3DB] text-sm ">{img.location}</p>
+                <p className="text-[#F2E3DB] text-sm ">{img.date}</p>
+                
+              </div>
+              
             </div>
           ))}
         </div >

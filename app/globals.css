@@ -34,3 +34,11 @@ body {
   font-family: var(--font-oswald), sans-serif;
 }
 
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
