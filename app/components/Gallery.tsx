@@ -1,61 +1,70 @@
 
-import { useEffect, useRef } from 'react';
 import Image from 'next/image'
 
 // type def for image
 type ImageType = {
-    id: number
-    imageSrc: string
-    name: string
-    location: string
-    date: string // changed from 'data' to 'date'
-    vertical: boolean
+  id: number;
+  imageSrc: string;
+  name: string;
+  location: string;
+  date: string;
+  vertical: boolean;
+  album: string;
+};
+
+const images: ImageType[] = [
+  {
+    id: 1,
+    imageSrc: '/images/DSCF0095.jpeg',
+    name: 'YSL Garden',
+    location: 'Merrekesh',
+    date: '06.02.2025',
+    vertical: false,
+    album: 'Morocco'
+  },
+  {
+    id: 2,
+    imageSrc: '/images/DSCF1365.jpeg',
+    name: 'Garden',
+    location: 'Barcelona',
+    date: '09.03.2025',
+    vertical: true,
+    album: 'Spain'
+  },
+  {
+    id: 3,
+    imageSrc: '/images/DSCF0595.jpeg',
+    name: 'Alley',
+    location: 'Fes',
+    date: '16.02.2025',
+    vertical: true,
+    album: 'Morocco'
+  },
+  {
+    id: 4,
+    imageSrc: '/images/DSCF0602.jpeg',
+    name: 'Hospital',
+    location: 'Fes',
+    date: '16.02.2025',
+    vertical: false,
+    album: 'Morocco'
   }
+];
 
-  const images: ImageType[] = [
-    {
-      id: 1,
-      imageSrc: '/images/DSCF0095.jpeg',
-      name: 'YSL Garden',
-      location: 'Merrekesh',
-      date: '06.02.2025',
-      vertical: false
 
-    },
-    {
-      id: 2,
-      imageSrc: '/images/DSCF1365.jpeg',
-      name: 'Garden',
-      location: 'Barcelona',
-      date: '09.03.2025',
-      vertical: true
-    },
-    {
-      id: 3,
-      imageSrc: '/images/DSCF0595.jpeg',
-      name: 'Alley',
-      location: 'Fes',
-      date: '16.02.2025',
-      vertical: true
-    },
-    {
-      id: 4,
-      imageSrc: '/images/DSCF0602.jpeg',
-      name: 'Hospital',
-      location: 'Fes',
-      date: '16.02.2025',
-      vertical: false
-    },
-    
-  ]
 
-  const albums: string[] = ["Morocco", "Spain"]
+
 
   export default function Gallery() {
+    const sortedImages = [
+      ...images.filter((img) => img.album === 'Morocco'),
+      ...images.filter((img) => img.album === 'Spain'),
+    ];
+    
     return (
       <div className="overflow-hidden max-w-[850px] h-[340px] bg-[#f2f2f2] px-1 py-3 rounded-lg shadow">
-        <div className="flex flex-nowrap  h-[250px]  gap-1 overflow-x-auto no-scrollbar">
-          {images.map((img) => (
+        <div className="flex flex-nowrap  h-[250px]  gap-1 overflow-x-auto !scroll-smooth no-scrollbar">
+          {sortedImages.map((img) => (
             <div key={img.id} className="relative group flex items-center justify-center flex-none">
               <Image
                 src={img.imageSrc}
