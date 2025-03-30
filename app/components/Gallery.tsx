@@ -258,13 +258,13 @@ const images: ImageType[] = [
     vertical: false,
     album: 'Morocco'
   },
-
-
-
-
-
-
 ];
+
+
+
+
+
+
 
 const Albums:string[] = [
   "Morocco",
@@ -280,7 +280,7 @@ const Albums:string[] = [
     );
 
     return (
-      <div className="overflow-hidden max-w-[850px] h-[340px] bg-[#F2E3DB] px-1 py-3 rounded-lg shadow">
+      <div className="overflow-hidden max-w-[850px] h-[340px] bg-[#F2E3DB] px-1 py-3 rounded shadow">
         <div className="flex flex-nowrap  h-[250px]  gap-1 overflow-x-auto !scroll-smooth no-scrollbar">
           {sortedImages.map((img) => (
             <div key={img.id} className="relative group flex items-center justify-center flex-none">
