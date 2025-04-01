@@ -3,28 +3,24 @@ import { Anton, Oswald, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 // Font Configurations
+
 const anton = Anton({
-  weight: ["400"],
-  subsets: ["latin"],
+  subsets: ['latin'],
+  weight: '400',
   variable: '--font-anton',
-  display: "swap",
 });
 
 const oswald = Oswald({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
+  subsets: ['latin'],
+  weight: ['400', '600'],
   variable: '--font-oswald',
-  display: "swap",
 });
 
-const jetBrainsMono = JetBrains_Mono({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '600'],
   variable: '--font-jetbrainsmono',
-  display: "swap",
-  style: ["normal", "italic"],
 });
-
 export const metadata: Metadata = {
   title: "Evan St Pierre",
   description: "Built By Evan St Pierre",
@@ -39,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${anton.variable} ${oswald.variable} ${jetBrainsMono.variable}`}>
-      <body>
+    <html lang="en" className={`${anton.variable} ${oswald.variable} ${jetbrains.variable}`}>
+      <body className="font-[var(--font-oswald)]">
         {children}
       </body>
     </html>

@@ -39,8 +39,16 @@ export default function Intro() {
   }, [fiveDaysAgo]);
 
   return (
-    <div className="max-w-[1000px] h-[500px] bg-black text-white flex items-center justify-center">
-      TEST
+    <div className="min-w-[850px] max-w-[1000px] max-h-[500px] text-[#F2E3DB] flex justify-center items-start
+
+ flex-col ">
+      <p className="font-[var(--font-jetbrainsmono)] text-2xl" >
+        Hi My name is,
+      </p>
+      <div className="font-[var(--font-anton)] text-3xl">
+        Evan St Pierre
+      </div>
+      <p className=" min-w[300px] animate-typing font-[var(--font-jetbrainsmono)] text-2xl">I am a newly graduated Computer Science Major.</p>
     </div>
   );
 }
