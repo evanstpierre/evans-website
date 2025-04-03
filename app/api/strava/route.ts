@@ -40,25 +40,17 @@ export async function GET(request: NextRequest) {
     const BASE_URL =  'https://www.strava.com/api/v3/';
     const RECENT_CUTOFF = 10 
     
-    // TODO: REFRESH THE TOKEN
     const access_token = await getValidAccessToken()
     console.log("aceess_token", access_token)
 
-
-
     const statsResponse = await fetch(`${BASE_URL}athletes/${process.env.STRAVA_ATHLETE_ID}/stats`, {
-        // Optional: forward some headers, add auth tokens, etc.
         headers: { Authorization: `Bearer ${access_token}` },
       });
    
     // Transform or forward the response
     const statsData = await statsResponse.json();
-    // const transformed = { ...statsData, source: 'proxied-through-nextjs' };
-    
     const recent = statsData.recent_ride_totals || {};
-    
     const all = statsData.all_ride_totals || {};
-    
     const recentCount = recent.count || 0;
     
     let transformed;

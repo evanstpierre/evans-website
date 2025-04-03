@@ -12,10 +12,6 @@ export async function GET() {
   const startDate = date.toISOString().split('T')[0];
 
 
-
-
-
-
   if (!teamId || !startDate || !endDate) {
     return new Response(JSON.stringify({ error: 'Missing query parameters: teamId, start, end' }), {
       status: 400,
