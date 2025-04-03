@@ -41,7 +41,6 @@ export async function GET(request: NextRequest) {
     const RECENT_CUTOFF = 10 
     
     const access_token = await getValidAccessToken()
-    console.log("aceess_token", access_token)
 
     const statsResponse = await fetch(`${BASE_URL}athletes/${process.env.STRAVA_ATHLETE_ID}/stats`, {
         headers: { Authorization: `Bearer ${access_token}` },
