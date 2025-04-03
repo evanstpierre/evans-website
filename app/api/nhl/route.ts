@@ -18,7 +18,6 @@ export async function GET() {
   }
 
   const data = await response.json();
-  console.log(`NHL API Response for date ${date}:`, data);
 
   const lastGame =
   data.games

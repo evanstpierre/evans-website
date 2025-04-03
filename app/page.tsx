@@ -1,6 +1,7 @@
 import Gallery from '@/app/components/Gallery';
 import ActivityStats from './components/ActivityStats';
 import Intro from './components/Intro';
+import Timeline from './components/Timeline';
 
 export default function Home() {
   return (
@@ -9,6 +10,8 @@ export default function Home() {
       <div className="max-w-[1440px] px-[80px]   gap-20 flex  flex-col ">
         <Intro/>
         <Gallery />
+        <Timeline />
+
 
         {/* <ActivityStats /> */}
       </div>
