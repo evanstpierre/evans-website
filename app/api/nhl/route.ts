@@ -39,8 +39,12 @@ export async function GET() {
     const lastGameRsp = {
       date: gameDate,
       homeTeam: homeTeam.commonName?.default || 'Home Team',
+      homeId: homeTeam.id,
+      homeScore: homeTeam.score,
       awayTeam: awayTeam.commonName?.default || 'Away Team',
-      score: `${awayTeam.score ?? 0}–${homeTeam.score ?? 0}`,
+      awayId: awayTeam.id,
+      awayScore: awayTeam.score,
+  
     };
     
     

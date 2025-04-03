@@ -1,12 +1,20 @@
 
 import { NextRequest } from 'next/server';
 
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
+export async function GET() {
 
-  const teamId = searchParams.get('teamId');
-  const startDate = searchParams.get('start');
-  const endDate = searchParams.get('end');
+  const teamId = 141
+
+  // Get start and end date
+  const date = new Date();
+  const endDate = date.toISOString().split('T')[0];
+  date.setDate(date.getDate() - 7);
+  const startDate = date.toISOString().split('T')[0];
+
+
+
+
+
 
   if (!teamId || !startDate || !endDate) {
     return new Response(JSON.stringify({ error: 'Missing query parameters: teamId, start, end' }), {
@@ -15,9 +23,8 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  const apiUrl = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=${teamId}&startDate=${startDate}&endDate=${endDate}`;
-
-  const response = await fetch(apiUrl);
+  const response = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=${teamId}&startDate=${startDate}&endDate=${endDate}`);
+  
   if (!response.ok) {
     return new Response(JSON.stringify({ error: 'Failed to fetch MLB data' }), {
       status: 500,
@@ -26,33 +33,23 @@ export async function GET(request: NextRequest) {
   }
 
   const data = await response.json();
+  const lastGame = data.dates
+  ?.filter((day: any) => day.totalItems >= 1)
+  .reduce((latest: any, current: any) => {
+    return new Date(current.date) > new Date(latest.date) ? current : latest;
+  }).games?.[0];
 
-  const schedule =
-  data.dates
-    ?.filter((day: any) => day.totalItems >= 1)
-    .map((day: any) => ({
-      date: day.date,
-      games: day.games.map((game: any) => ({
-        away: {
-          score: game.teams.away?.score ?? null,
-          isWinner: game.teams.away?.isWinner ?? null,
-          team: {
-            id: game.teams.away?.team?.id ?? null,
-            name: game.teams.away?.team?.name ?? 'Unknown',
-          },
-        },
-        home: {
-          score: game.teams.home?.score ?? null,
-          isWinner: game.teams.home?.isWinner ?? null,
-          team: {
-            id: game.teams.home?.team?.id ?? null,
-            name: game.teams.home?.team?.name ?? 'Unknown',
-          },
-        },
-      })),
-    })) ?? [];
+  const lastGameRsp = {
+      homeTeam: lastGame.teams.home.team.name,
+      homeId: lastGame.teams.home.team.id,
+      homeScore: lastGame.teams.home.score,
+      awayTeam: lastGame.teams.away.team.name,
+      awayId: lastGame.teams.away.team.id,
+      awayScore:lastGame.teams.away.score,
+  };
 
-  return new Response(JSON.stringify({ schedule }), {
+
+  return new Response(JSON.stringify({ lastGameRsp }), {
     headers: { 'Content-Type': 'application/json' },
   });
 }
