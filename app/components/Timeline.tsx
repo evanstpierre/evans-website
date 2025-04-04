@@ -38,7 +38,7 @@ export default function Timeline(){
                     <div>
                         2022
                     </div>
-                    <p>
+                    <p className='mx-3'>
                     Worked on the client portal.  
                     </p>
 
@@ -50,7 +50,7 @@ export default function Timeline(){
                     <div>
                         2021
                     </div>
-                    <p>
+                    <p className='mx-3'>
                     Led morning scrum. Developed test for COVID-19 check-in application and built frontend component for the finance portal.
                     </p>
                     
