@@ -53,23 +53,23 @@ export async function GET(request: NextRequest) {
     const recentCount = recent.count || 0;
     
     let transformed;
-    if( recentCount >= RECENT_CUTOFF){
-        transformed = {
-            recent_ride_totals: {
-              distance: recent.distance,
-              moving_time: recent.moving_time,
-              elevation_gain: recent.elevation_gain,
-            },
-          };
-    }else {
-        transformed = {
-            all_ride_totals: {
-              distance: all.distance,
-              moving_time: all.moving_time,
-              elevation_gain: all.elevation_gain,
-            },
-          };
-    } 
+    if (recentCount >= RECENT_CUTOFF) {
+      transformed = {
+        recent_ride_totals: {
+          distance: parseFloat((recent.distance / 1000).toFixed(2)),
+          moving_time: parseFloat((recent.moving_time / 3600).toFixed(2)),
+          elevation_gain: parseFloat(recent.elevation_gain.toFixed(2)),
+        },
+      };
+    } else {
+      transformed = {
+        all_ride_totals: {
+          distance: parseFloat((all.distance / 1000).toFixed(2)),
+          moving_time: parseFloat((all.moving_time / 3600).toFixed(2)),
+          elevation_gain: parseFloat(all.elevation_gain.toFixed(2)),
+        },
+      };
+    }
    
     return new Response(JSON.stringify(transformed), {
       headers: { 'Content-Type': 'application/json' },

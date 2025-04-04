@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server';
 
 export async function GET() {
 
-  const teamId = 141
+  const jaysId = 141
 
   // Get start and end date
   const date = new Date();
@@ -12,14 +12,14 @@ export async function GET() {
   const startDate = date.toISOString().split('T')[0];
 
 
-  if (!teamId || !startDate || !endDate) {
+  if (!jaysId || !startDate || !endDate) {
     return new Response(JSON.stringify({ error: 'Missing query parameters: teamId, start, end' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
     });
   }
 
-  const response = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=${teamId}&startDate=${startDate}&endDate=${endDate}`);
+  const response = await fetch(`https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=${jaysId}&startDate=${startDate}&endDate=${endDate}`);
   
   if (!response.ok) {
     return new Response(JSON.stringify({ error: 'Failed to fetch MLB data' }), {
@@ -29,22 +29,33 @@ export async function GET() {
   }
 
   const data = await response.json();
-  const lastGame = data.dates
-  ?.filter((day: any) => day.totalItems >= 1)
+  const lastGame =  data.dates
+  ?.flatMap((day: any) =>
+    day.games.filter((game: any) => game.status?.detailedState === "Final")
+  )
   .reduce((latest: any, current: any) => {
-    return new Date(current.date) > new Date(latest.date) ? current : latest;
-  }).games?.[0];
+    return new Date(current.gameDate) > new Date(latest.gameDate) ? current : latest;
+  });
+
 
   const lastGameRsp = {
-      homeTeam: lastGame.teams.home.team.name,
-      homeId: lastGame.teams.home.team.id,
-      homeScore: lastGame.teams.home.score,
-      awayTeam: lastGame.teams.away.team.name,
-      awayId: lastGame.teams.away.team.id,
-      awayScore:lastGame.teams.away.score,
+    jaysWin: lastGame.teams.home.team.id === jaysId 
+      ? lastGame.teams.home.isWinner 
+      : lastGame.teams.away.isWinner,
+  
+    jaysScore: lastGame.teams.home.team.id === jaysId 
+      ? lastGame.teams.home.score 
+      : lastGame.teams.away.score,
+  
+    opponent: lastGame.teams.home.team.id === jaysId 
+      ? lastGame.teams.away.team.name 
+      : lastGame.teams.home.team.name,
+  
+    opponentScore: lastGame.teams.home.team.id === jaysId 
+      ? lastGame.teams.away.score 
+      : lastGame.teams.home.score,
   };
-
-
+  
   return new Response(JSON.stringify({ lastGameRsp }), {
     headers: { 'Content-Type': 'application/json' },
   });

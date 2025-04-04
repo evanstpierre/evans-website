@@ -33,21 +33,27 @@ export async function GET() {
         headers: { 'Content-Type': 'application/json' },
       });
     }
-    const { gameDate, homeTeam, awayTeam } = lastGame;
-  
-    const lastGameRsp = {
-      date: gameDate,
-      homeTeam: homeTeam.commonName?.default || 'Home Team',
-      homeId: homeTeam.id,
-      homeScore: homeTeam.score,
-      awayTeam: awayTeam.commonName?.default || 'Away Team',
-      awayId: awayTeam.id,
-      awayScore: awayTeam.score,
-  
-    };
-    
-    
+    const leafsId = 10;
+    const isLeafsHome = lastGame.homeTeam.id === leafsId;
 
+    const lastGameRsp = {
+      leafsWin: isLeafsHome
+        ? lastGame.homeTeam.score > lastGame.awayTeam.score
+        : lastGame.awayTeam.score > lastGame.homeTeam.score,
+
+      leafsScore: isLeafsHome
+        ? lastGame.homeTeam.score
+        : lastGame.awayTeam.score,
+
+      opponent: isLeafsHome
+        ? lastGame.awayTeam.placeName.default + ' ' + lastGame.awayTeam.commonName.default
+        : lastGame.homeTeam.placeName.default + ' ' + lastGame.homeTeam.commonName.default,
+
+      opponentScore: isLeafsHome
+        ? lastGame.awayTeam.score
+        : lastGame.homeTeam.score
+    };
+      
   return new Response(JSON.stringify({ lastGameRsp }), {
     headers: { 'Content-Type': 'application/json' },
   });
