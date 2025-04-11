@@ -55,18 +55,20 @@ export async function GET(request: NextRequest) {
     let transformed;
     if (recentCount >= RECENT_CUTOFF) {
       transformed = {
-        recent_ride_totals: {
-          distance: parseFloat((recent.distance / 1000).toFixed(2)),
-          moving_time: parseFloat((recent.moving_time / 3600).toFixed(2)),
-          elevation_gain: parseFloat(recent.elevation_gain.toFixed(2)),
+        ride_totals: {
+          distance: parseFloat((recent.distance / 1000).toFixed(0)),
+          moving_time: parseFloat((recent.moving_time / 3600).toFixed(0)),
+          elevation_gain: parseFloat(recent.elevation_gain.toFixed(0)),
+          recent_totals: true,
         },
       };
     } else {
       transformed = {
-        all_ride_totals: {
-          distance: parseFloat((all.distance / 1000).toFixed(2)),
-          moving_time: parseFloat((all.moving_time / 3600).toFixed(2)),
-          elevation_gain: parseFloat(all.elevation_gain.toFixed(2)),
+        ride_totals: {
+          distance: parseFloat((all.distance / 1000).toFixed(0)),
+          moving_time: parseFloat((all.moving_time / 3600).toFixed(0)),
+          elevation_gain: parseFloat(all.elevation_gain.toFixed(0)),
+          recent_totals: false,
         },
       };
     }

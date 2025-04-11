@@ -10,6 +10,7 @@ export default function Home() {
       <div className="max-w-[1440px] px-[80px]   gap-20 flex  flex-col ">
         <Intro/>
         <Gallery />
+        <ActivityStats />
         <Timeline />
 
 

@@ -1,12 +1,34 @@
-import Image from 'next/image';
+// components/Icon.tsx
+import React from "react";
+import classNames from "classnames";
 
-export default function MyIcon() {
+type IconProps = {
+  name: string;
+  fill?: 0 | 1;
+  weight?: number;
+  grade?: number;
+  opticalSize?: number;
+  className?: string;
+};
+
+export const Icon: React.FC<IconProps> = ({
+  name,
+  fill = 0,
+  weight = 400,
+  grade = 0,
+  opticalSize = 48,
+  className = "",
+}) => {
+  const style = {
+    fontVariationSettings: `'FILL' ${fill}, 'wght' ${weight}, 'GRAD' ${grade}, 'opsz' ${opticalSize}`,
+  };
+
   return (
-    <Image
-      src="/icons/my-icon.png"
-      alt="My icon"
-      width={32}
-      height={32}
-    />
+    <span
+      className={classNames("material-symbols-outlined", className)}
+      style={style}
+    >
+      {name}
+    </span>
   );
-}
+};

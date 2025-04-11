@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Intro() {
     
@@ -39,16 +40,26 @@ export default function Intro() {
   }, [fiveDaysAgo]);
 
   return (
-    <div className="min-w-[850px] max-w-[1000px] max-h-[500px] text-[#F2E3DB] flex justify-center items-start
-
- flex-col ">
-      <p className="font-[var(--font-jetbrainsmono)] text-2xl" >
-        Hi My name is,
-      </p>
-      <div className="font-[var(--font-anton)] text-3xl">
-        Evan St Pierre
+    <div className="min-w-[850px] max-w-[1000px] max-h-[500px] text-[#F2E3DB] flex justify-center 
+      flex-row justify-evenly ">
+        <div>
+        <p className="font-[var(--font-jetbrainsmono)] text-2xl" >
+          Hi My name is,
+        </p>
+        <div className="font-[var(--font-anton)] text-3xl">
+          Evan St Pierre
+        </div>
+        <p className=" min-w[300px] animate-typing font-[var(--font-jetbrainsmono)] text-2xl">I am a newly graduated Computer Science Major.</p>
       </div>
-      <p className=" min-w[300px] animate-typing font-[var(--font-jetbrainsmono)] text-2xl">I am a newly graduated Computer Science Major.</p>
+      <div className="rounded-full overflow-hidden">
+        <Image 
+        src={'/avatar/happy.png'}
+        alt={"A smiling avatar of Evan St Pierre" }
+        width={200}
+        height={200}
+        style={{ objectFit: 'cover' }}
+        />
+      </div>
     </div>
   );
 }
