@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Icon } from '@mui/material';
 
+
 const StatsLabel:string[] = [
     "Cycled",
     "Cycled",
@@ -43,23 +44,22 @@ export default function ActivityStats() {
     
 
     return(
-        <div className="relative bg-[#263A29] h-[200px] w-[850px] rounded shadow p-4">
+        <div className="relative bg-[#263A29] h-[200px] w-full max-w-[850px] rounded shadow p-4">
             <div className="absolute top-2 right-2">
-                <div className="bg-[#D97C42] text-[#F3E2D3] rounded-full w-8 h-8 group-hover:w-[320px] flex items-center justify-center">
-                <Icon
-                    sx={{
-                    fontFamily: 'Material Symbols Outlined',
-                    fontSize: 32,
-                    fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48",
-                    lineHeight: 1,
-                    }}
-                >
-                    info
-                </Icon>
+                <div className="bg-[#D97C42] text-[#F3E2D3] rounded-full w-8 h-8 group-hover:w-[320px] flex items-center justify-center opacity-75">
+                    <Icon
+                        sx={{
+                        fontFamily: 'Material Symbols Outlined',
+                        fontSize: 32,
+                        fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48",
+                        lineHeight: 1,
+                        }}
+                    >
+                        info
+                    </Icon>
                 </div>
             </div>
-        <div className="text-white mt-10 flex flex-collumn justify-evenly
-">
+        <div className="text-[#F2E3DBBF] mt-10 flex flex-collumn justify-evenly">
             <div className='flex flex-col justify-center items-center'>
                 <Icon
                     sx={{

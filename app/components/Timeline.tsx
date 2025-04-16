@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export default function Timeline(){
     return (
-        <div className="max-w-[850px] h-150 flex  items-start justify-start">
+        <div className="max-w-[850px] flex  items-start justify-start">
 
             <div className='w-1 h-70 bg-[#F2E3DB] relative mx-10 '>
                 <div className="w-13 h-13 rounded-full bg-[#F2E3DB] overflow-hidden flex items-center justify-center absolute top-0 left-1/2 -translate-x-1/2">
@@ -30,7 +30,7 @@ export default function Timeline(){
                 </div>
             </div>
 
-            <div className='max-w-100 h-130'>
+            <div className='max-w-100 opacity-75'>
                 <div className='h-30'>
                     <div>
                         Software Developer Intern | Searchspring
