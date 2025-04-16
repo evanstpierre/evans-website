@@ -69,8 +69,11 @@ export default function Intro() {
           deleteSpeed={50}
           delaySpeed={1500}
         /></p>
-        <button className="w-[75px] h-[40px] bg-[#E86A33] rounded-md">
-          Connect
+        <button 
+          className="w-[75px] h-[40px] bg-[#E86A33] rounded-md cursor-pointer opacity-75 hover:opacity-100"
+          onClick={() => window.open('https://www.linkedin.com/in/evan-st-pierre/', '_blank')}
+        >
+          Connect 
         </button>
         <p className="text-xl opacity-75">
         I am a new Grad with a degree in Computer Science Grad who is seeking job opportunities. 

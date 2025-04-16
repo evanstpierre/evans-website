@@ -87,9 +87,12 @@ const Albums:string[] = [
             </div>
           ))}
         </div >
-        <div className='flex justify-center items-center p-2'>
-          <div className='w-[230px] h-[55px] bg-[#263A29]  rounded flex justify-center items-center'>
+        <div className='flex justify-center items-center p-2 gap-x-2'>
+          <div className='w-[175px] h-[55px] bg-[#263A29]  rounded flex justify-center items-center cursor-pointer'>
             Morocco
+          </div>
+          <div className='w-[175px] h-[55px] border-2 border-[#263A29]  text-[#263A29] rounded flex justify-center items-center opacity-75 cursor-pointer'>
+            Spain
           </div>
         </div>
       </div>
