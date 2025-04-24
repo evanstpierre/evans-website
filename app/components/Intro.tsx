@@ -79,7 +79,7 @@ export default function Intro() {
         I am a new Grad with a degree in Computer Science Grad who is seeking job opportunities. 
         </p>
       </div>
-      <div className="rounded-full overflow-hidden">
+      <div className=" hidden lg:block rounded-full overflow-hidden ">
         <Image 
         src={'/avatar/happy.png'}
         alt={"A smiling avatar of Evan St Pierre" }
