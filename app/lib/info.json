@@ -2,14 +2,16 @@
     "resume": null,
     "intro":{
         "texts": [ "I love building cool things!",
-                " I am a huge leafs and jays fan"],
+                " I am a huge leafs and jays fan"
+              ],
         "button":{
             "text":"Connect",
             "link":"https://www.linkedin.com/in/evan-st-pierre/"
         }
     },
     "hobbies":{
-        "intro": "Whe I’m not learning about computers/math I am probably cycling. I love exploring new places and drinking a nice cup of coffee [preferably a pour over]. I am proud Toronto local who is a passionate Maple Leafs and Blue Jays fan.",
+        "intro": "When I’m not diving into computers or math, you’ll probably find me out cycling. I love exploring new places and enjoying a good cup of coffee—preferably a pour-over. I’m a proud Toronto local and a passionate fan of the Maple Leafs and Blue Jays.",
+        
         "gallary":{
             "text": "Photos from my recent travels.",
             "albums":[{
@@ -288,6 +290,6 @@
         }
     ],
     "contact":{
-        "text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec justo vel massa tristique dapibus. Curabitur vulputate, elit ut dictum varius, eros velit tempor quam, non hendrerit leo nulla non elit."
+        "text":"Let’s grab a coffee! I love meeting new people and chatting about anything—especially tech, travel, or the Leafs.",
     }
 }

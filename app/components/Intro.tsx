@@ -14,16 +14,23 @@ export default function Intro() {
         async function getData() {
         try {
             const res = await fetch('/api/nhl/');
-            if (!res.ok) throw new Error('API error');
-            const json = await res.json();
-            if (json.lastGameRsp?.leafsWin) {
-              setIntroWords(prev => [
-                ...prev,
-                "I'm happy the Leafs beat the " + json.lastGameRsp?.opponent + " " + json.lastGameRsp?.leafsScore + "-"+ json.lastGameRsp?.opponentScore,
-              ]);
-            } else {
-              console.log('🏒 The Leafs lost.');
+            if (res.status === 204) {
+              console.log('ℹ️ No NHL games data found.');
+            } else if (!res.ok) {
+              throw new Error('NHL API error');
             }
+            else{
+              const json = await res.json();
+              if (json.lastGameRsp?.leafsWin) {
+                setIntroWords(prev => [
+                  ...prev,
+                  "I'm happy the Leafs beat the " + json.lastGameRsp?.opponent + " " + json.lastGameRsp?.leafsScore + "-"+ json.lastGameRsp?.opponentScore,
+                ]);
+              } else {
+                console.log('🏒 The Leafs lost.');
+              }
+            }
+           
 
         } catch (err) {
             console.error('Failed to fetch NHL data:', err);
@@ -31,16 +38,22 @@ export default function Intro() {
 
         try {
           const res = await fetch('/api/mlb/');
-          if (!res.ok) throw new Error('API error');
-          const json = await res.json();
-          if (json.lastGameRsp?.jaysWin) {
-            setIntroWords(prev => [
-              ...prev,
-              "Jays won there last game,"+ json.lastGameRsp?.jaysScore + "-"+ json.lastGameRsp?.opponentScore +"!",
-            ]);
-          } else {
-            console.log('⚾ The Jays lost.');
-          }
+           if (res.status === 204) {
+              console.log('ℹ️ No MLB games data found.');
+            } else if (!res.ok) {
+              throw new Error('MLB API error');
+            }
+          else{
+            const json = await res.json();
+            if (json.lastGameRsp?.jaysWin) {
+              setIntroWords(prev => [
+                ...prev,
+                "Jays won there last game,"+ json.lastGameRsp?.jaysScore + "-"+ json.lastGameRsp?.opponentScore +"!",
+              ]);
+            } else {
+              console.log('⚾ The Jays lost.');
+            }
+        }
       } catch (err) {
           console.error('Failed to fetch NHL data:', err);
       }

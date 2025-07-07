@@ -29,6 +29,12 @@ export async function GET() {
   }
 
   const data = await response.json();
+
+  if(data.totalGames == 0){
+    console.log('ℹ️ No games found in the past week.');
+    return new Response(null, { status: 204 }); // 204 No Content
+  }
+
   const lastGame =  data.dates
   ?.flatMap((day: any) =>
     day.games.filter((game: any) => game.status?.detailedState === "Final")

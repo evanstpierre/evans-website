@@ -18,6 +18,13 @@ export async function GET() {
   }
 
   const data = await response.json();
+  // add check if there is no game
+  
+  if (!data.games || data.games.length === 0) {
+    console.log('ℹ️ No games found in the past week.');
+    return new Response(null, { status: 204 }); // 204 No Content
+  }
+
 
   const lastGame =
   data.games

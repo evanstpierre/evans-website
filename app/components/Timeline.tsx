@@ -1,7 +1,25 @@
 import Image from 'next/image'
  
  
+// TODO:
 
+
+const experiences = [
+  {
+    title: "Software Developer Intern | Searchspring",
+    year: "2022",
+    description: "Worked on the client portal.",
+    icon: "/icons/searchspring.png",
+  },
+  {
+    title: "Software Developer Intern | MarshMclennan",
+    year: "2021",
+    description:
+      "Led morning scrum. Developed test for COVID-19 check-in application and built frontend component for the finance portal.",
+    icon: "/icons/MMC.png",
+  },
+  // Add more objects here...
+];
 
 export default function Timeline(){
     return (

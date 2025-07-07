@@ -1,0 +1,17 @@
+{
+    "name":"Evan St Pierre",
+    "email":"evanlstpierre@gmail.com",
+    "strava":{
+        "base_url":"evanlstpierre.ca",
+        "client_id":"105987",
+        "athlete_id": "69973547",
+        "client_secret":"asfdgasgafgsdgs",
+        "access_token":"adfa45326fgsjyy",
+        "refresh_token":"fqdsat43q2542",
+        "auth_code":"dfqfeq435154256ytgbdvc",
+        "expire_at":"174364974" 
+
+
+    }
+
+}
