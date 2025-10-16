@@ -1,6 +1,7 @@
+// app/api/data/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import info from '../../lib/info.json';
-// mock mongodb request (only until request is fully in db)
-export async function GET(req: NextRequest) {
+import info from '@/app/lib/info.json'; // ✅ new path
+
+export async function GET() {
   return NextResponse.json({ data: info });
 }

@@ -5,13 +5,30 @@ import Intro from './components/Intro';
 import Timeline from './components/Timeline';
 import Header from './components/Header';
 import Contact from './components/Contact';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const DEFAULT_INTRO = "When I’m not learning about computers/math I am probably cycling. I love exploring new places and drinking a nice cup of coffee [preferably a pour over]. I am proud Toronto local who is a passionate Maple Leafs and Blue Jays fan.";
 
 
 export default function Home() {
-  const [hobbieIntro, setHobbieIntro] = useState(DEFAULT_INTRO)
+const [data, setData] = useState(null);
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  async function fetchData() {
+    try {
+      const res = await fetch("/api/data");
+      if (!res.ok) throw new Error("Network response was not ok");
+      const json = await res.json();
+      setData(json);
+    } catch (err) {
+      console.error("❌ Fetch failed:", err);
+    } finally {
+      setLoading(false);
+    }
+  }
+  fetchData();
+}, []);
 
 
   return (
@@ -23,7 +40,7 @@ export default function Home() {
           <div className='flex flex-col gap-y-10'>
             <div className='flex flex-col gap-y-1'>
               <h1 className='anton text-3xl'>Hobbies</h1>
-            { hobbieIntro &&   <p className='max-w-[600px] opacity-75 text-xl'>
+            { <p className='max-w-[600px] opacity-75 text-xl'>
               Whe I’m not learning about computers/math I am probably cycling. I love exploring new places and drinking a nice cup of coffee [preferably a pour over]. I am proud Toronto local who is a passionate Maple Leafs and Blue Jays fan.
               </p>}
             </div>
