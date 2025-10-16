@@ -1,0 +1,26 @@
+services:
+  next:
+    build:
+      context: .
+      dockerfile: Dockerfile 
+    ports:
+      - "3000:3000"
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
+      HOSTNAME: "0.0.0.0"
+      NODE_ENV: "development"
+      BASE_URL:
+      STRAVA_CLIENT_ID: ${STRAVA_CLIENT_ID}
+      STRAVA_ATHLETE_ID: ${STRAVA_ATHLETE_ID}
+      STRAVA_CLIENT_SECRET: ${STRAVA_CLIENT_SECRET}
+      STRAVA_ACCESS_TOKEN: ${STRAVA_ACCESS_TOKEN}
+      STRAVA_REFRESH_TOKEN: ${STRAVA_REFRESH_TOKEN}
+      STRAVA_AUTH_CODE: ${STRAVA_AUTH_CODE}
+      STRAVA_EXPIRES_AT: ${STRAVA_EXPIRES_AT}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: always
+    command: ["npm", "run", "dev"]
+    
