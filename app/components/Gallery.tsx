@@ -1,4 +1,5 @@
 "use client"
+import { Album } from '@mui/icons-material';
 import Image from 'next/image'
 import { use, useEffect, useState } from 'react';
 
@@ -58,6 +59,7 @@ const Albums:string[] = [
     const sortedPhotos = photos.filter((img) => img.album === 'Morocco');
     const sortedPhotos2 = photos.filter((img) => img.album === 'Spain');
     
+    const Album = [sortedPhotos, sortedPhotos]
     if (loading) {
       return (
         <div className="w-full h-[340px] flex items-center justify-center bg-[#F2E3DB] rounded shadow">
@@ -66,22 +68,29 @@ const Albums:string[] = [
       );
     }
 
+
+
+        //   <div className="overflow-hidden max-w-[850px] h-[340px] bg-[#F2E3DB] px-0 py-3 rounded shadow">
+        // <div className="flex flex-nowrap  h-[250px]  gap-1 overflow-x-auto !scroll-smooth no-scrollbar px-2"></div>
+
     return (
-      <div className="overflow-hidden max-w-[850px] h-[340px] bg-[#F2E3DB] px-0 py-3 rounded shadow">
-        <div className="flex flex-nowrap  h-[250px]  gap-1 overflow-x-auto !scroll-smooth no-scrollbar px-2">
+        <div className="overflow-hidden h-[880px] sm:h-[340px] max-w-[400px] sm:max-w-[850px] bg-[#F2E3DB] px-3 py-5 rounded shadow">
+          <div className="flex flex-col sm:flex-row w-full h-[700px] sm:h-[250px] gap-1 overflow-y-auto sm:overflow-y-auto  no-scrollbar smooth-scroll">
           {isAlbum == 0 && sortedPhotos.map((img) => (
-            <div key={img.id} className="relative group flex items-center justify-center flex-none">
-              <Image
-                src={img.imageSrc}
-                alt={img.name}
-                height={250}
-                width={img.vertical ? 167 :  375 } // keeps layout stable
-                style={{ objectFit: 'cover' }}
-              />
+            <div
+              className={`relative group flex items-center justify-center flex-none h-[250px] ${
+                img.vertical ? "w-[167px]" : "max-w-[375px] sm:w-[375px]" 
+              }`}
+            >
+                  <Image
+            src={img.imageSrc}
+            alt={img.name}
+            fill
+            className="object-contain" // preserves aspect ratio, shows entire image
+          />
               {/* Hover Overlay */}
               <div   
-              className={`absolute top-0 left-0 h-[250px] border-2 border-[#263A29] ${
-              img.vertical ? 'w-[167px]' : 'w-[375px]'} flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+              className={`absolute top-0 left-0 h-[250px] border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               
               style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
                 >
@@ -92,19 +101,21 @@ const Albums:string[] = [
               
             </div>
           ))}
-           {isAlbum == 1 && sortedPhotos2.map((img) => (
-            <div key={img.id} className="relative group flex items-center justify-center flex-none">
-              <Image
-                src={img.imageSrc}
-                alt={img.name}
-                height={250}
-                width={img.vertical ? 167 :  375 } // keeps layout stable
-                style={{ objectFit: 'cover' }}
-              />
+          {isAlbum == 1 && sortedPhotos2.map((img) => (
+            <div
+              className={`relative group flex items-center justify-center flex-none h-[250px] ${
+                img.vertical ? "w-[167px]" : "max-w-[375px]" 
+              }`}
+            >
+                  <Image
+            src={img.imageSrc}
+            alt={img.name}
+            fill
+            className="object-contain" // preserves aspect ratio, shows entire image
+          />
               {/* Hover Overlay */}
               <div   
-              className={`absolute top-0 left-0 h-[250px] border-2 border-[#263A29] ${
-              img.vertical ? 'w-[167px]' : 'w-[375px]'} flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+              className={`absolute top-0 left-0 h-[250px] border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               
               style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
                 >
@@ -116,7 +127,13 @@ const Albums:string[] = [
             </div>
           ))}
         </div >
-        <div className='flex justify-center items-center p-2 gap-x-2'>
+        <div className=' sm:hidden flex justify-center items-center p-2 gap-x-2'>
+          <div className='rounded flex justify-center items-center w-[350px] h-[55px] bg-[#263A29]'>
+            More Photos
+          </div>
+      
+        </div>
+        <div className='flex justify-centeritems-center p-2 gap-x-2'>
           <div 
             className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==0? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
             onClick={() => setIsAlbum(0)}

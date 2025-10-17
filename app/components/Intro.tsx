@@ -88,7 +88,7 @@ export default function Intro() {
         >
           Connect 
         </button>
-        <p className="text-xl opacity-75">
+        <p className="text-md sm:text-l md:text-xl opacity-75">
         I am a new Grad with a degree in Computer Science Grad who is seeking job opportunities. 
         </p>
       </div>

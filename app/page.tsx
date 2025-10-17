@@ -32,15 +32,15 @@ useEffect(() => {
 
 
   return (
-    <main className="min-h-screen p-8 sm:p-20 pb-20 grid place-items-center gap-y-20">
+    <main className="min-h-screen p-5 sm:p-10 pb-20 grid place-items-center gap-y-20">
       
-        <Header/>
-        <div className='max-w-[1000px] w-full flex flex-col justify-start  gap-y-20 '>
+       <Header />
+       <div className="max-w-[1000px] flex flex-col justify-start gap-y-20 my-10 mt-8 sm:m-1 w-full overflow-hidden">
           <Intro/>
           <div className='flex flex-col gap-y-10'>
             <div className='flex flex-col gap-y-1'>
               <h1 className='anton text-3xl'>Hobbies</h1>
-            { <p className='max-w-[600px] opacity-75 text-xl'>
+            { <p className='max-w-[375px] md:max-w-[600px] opacity-75 text-xl'>
               Whe I’m not learning about computers/math I am probably cycling. I love exploring new places and drinking a nice cup of coffee [preferably a pour over]. I am proud Toronto local who is a passionate Maple Leafs and Blue Jays fan.
               </p>}
             </div>
