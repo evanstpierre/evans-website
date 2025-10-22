@@ -58,8 +58,8 @@ const Albums:string[] = [
     // );
     const sortedPhotos = photos.filter((img) => img.album === 'Morocco');
     const sortedPhotos2 = photos.filter((img) => img.album === 'Spain');
-    
-    const Album = [sortedPhotos, sortedPhotos]
+    const sortedPhotos3 = photos.filter((img) => img.album === 'Denmark');
+
     if (loading) {
       return (
         <div className="w-full h-[340px] flex items-center justify-center bg-[#F2E3DB] rounded shadow">
@@ -129,6 +129,32 @@ const Albums:string[] = [
               
             </div>
           ))}
+           {isAlbum == 2 && sortedPhotos3.map((img) => (
+            <div
+              key={img.id} // ✅ unique key for each image
+              className={`relative group flex items-center justify-center flex-none  ${
+                img.vertical ? "w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
+              }`}
+            >
+                  <Image
+            src={img.imageSrc}
+            alt={img.name}
+            fill
+            className="object-contain" // preserves aspect ratio, shows entire image
+          />
+              {/* Hover Overlay */}
+              <div   
+              className={`absolute top-0 left-0 h-[250px] border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+              
+              style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
+                >
+                <p className="text-[#F2E3DB] text-sm ">{img.location}</p>
+                <p className="text-[#F2E3DB] text-sm ">{img.date}</p>
+                
+              </div>
+              
+            </div>
+          ))}
         </div >
         <div className=' sm:hidden flex justify-center items-center p-2 gap-x-2'>
           <div className='rounded flex justify-center items-center w-[350px] h-[55px] bg-[#263A29]'>
@@ -148,6 +174,12 @@ const Albums:string[] = [
             onClick={() => setIsAlbum(1)}
           >
             Spain
+          </div>
+                    <div 
+            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==2? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
+            onClick={() => setIsAlbum(2)}
+          >
+           Denmark
           </div>
         </div>
       </div>

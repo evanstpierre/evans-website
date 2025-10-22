@@ -324,6 +324,60 @@
       "date": "09.03.2025",
       "vertical": true,
       "album": "Spain"
+    },
+     {
+      "id": 35,
+      "imageSrc": "/images/DSCF1489.jpeg",
+      "name": "The Watering Hole",
+      "location": "Copenhagen",
+      "date": "29.05.2025",
+      "vertical": false,
+      "album": "Denmark"
+    },
+         {
+      "id": 36,
+      "imageSrc": "/images/DSCF1498.jpeg",
+      "name": "The green hosue",
+      "location": "Copenhagen",
+      "date": "09.06.2025",
+      "vertical": true,
+      "album": "Denmark"
+    },
+         {
+      "id": 37,
+      "imageSrc": "/images/DSCF1520.jpeg",
+      "name": "The Peacock",
+      "location": "Copenhagen",
+      "date": "30.05.2025",
+      "vertical": false,
+      "album": "Denmark"
+    },
+         {
+      "id": 38,
+      "imageSrc": "/images/DSCF1640.jpeg",
+      "name": "The castle in the garden",
+      "location": "Copenhagen",
+      "date": "06.06.2025",
+      "vertical": false,
+      "album": "Denmark"
+    },
+         {
+      "id": 39,
+      "imageSrc": "/images/DSCF1666.jpeg",
+      "name": "The Metro",
+      "location": "Copenhagen",
+      "date": "07.06.2025",
+      "vertical": false,
+      "album": "Denmark"
+    },
+         {
+      "id": 40,
+      "imageSrc": "/images/DSCF1700.jpeg",
+      "name": "Outside the Metro",
+      "location": "Copenhagen",
+      "date": "07.06.2025",
+      "vertical": false,
+      "album": "Denmark"
     }
     
   ]
