@@ -72,14 +72,16 @@ const Albums:string[] = [
 
         //   <div className="overflow-hidden max-w-[850px] h-[340px] bg-[#F2E3DB] px-0 py-3 rounded shadow">
         // <div className="flex flex-nowrap  h-[250px]  gap-1 overflow-x-auto !scroll-smooth no-scrollbar px-2"></div>
+        //  h-[250px]
 
     return (
         <div className="overflow-hidden h-[880px] sm:h-[340px] max-w-[400px] sm:max-w-[850px] bg-[#F2E3DB] px-3 py-5 rounded shadow">
           <div className="flex flex-col sm:flex-row w-full h-[700px] sm:h-[250px] gap-1 overflow-y-auto sm:overflow-y-auto  no-scrollbar smooth-scroll">
           {isAlbum == 0 && sortedPhotos.map((img) => (
             <div
-              className={`relative group flex items-center justify-center flex-none h-[250px] ${
-                img.vertical ? "w-[167px]" : "max-w-[375px] sm:w-[375px]" 
+              key={img.id} // ✅ unique key for each image
+              className={`relative group flex items-center justify-center flex-none  ${
+                img.vertical ? "w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
               }`}
             >
                   <Image
