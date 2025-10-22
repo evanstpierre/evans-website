@@ -243,5 +243,87 @@
       "date": "17.02.2025",
       "vertical": false,
       "album": "Morocco"
+    },
+    {
+      "id": 26,
+      "imageSrc": "/images/DSCF0827.jpeg",
+      "name": "The Arena",
+      "location": "Malaga",
+      "date": "21.02.2025",
+      "vertical": false,
+      "album": "Spain"
+    },
+    {
+      "id": 27,
+      "imageSrc": "/images/DSCF0915.jpeg",
+      "name": "Garden",
+      "location": "Cordoba",
+      "date": "24.02.2025",
+      "vertical": false,
+      "album": "Spain"
+    },    
+    {
+      "id": 28,
+      "imageSrc": "/images/DSCF1118.jpeg",
+      "name": "At the Museum",
+      "location": "Madrid",
+      "date": "28.02.2025",
+      "vertical": true,
+      "album": "Spain"
+    },
+    {
+      "id": 29,
+      "imageSrc": "/images/DSCF1184.jpeg",
+      "name": "Boats in the Bay",
+      "location": "San Sebastian",
+      "date": "04.03.2025",
+      "vertical": false,
+      "album": "Spain"
+    },
+    {
+      "id": 30,
+      "imageSrc": "/images/DSCF1193.jpeg",
+      "name": "The Church",
+      "location": "San Sebastian",
+      "date": "04.03.2025",
+      "vertical": false,
+      "album": "Spain"
+    },
+        {
+      "id": 31,
+      "imageSrc": "/images/DSCF1199.jpeg",
+      "name": "The Bodega",
+      "location": "San Sebastian",
+      "date": "04.03.2025",
+      "vertical": false,
+      "album": "Spain"
+    },
+    {
+      "id": 32,
+      "imageSrc": "/images/DSCF1219.jpeg",
+      "name": "The Claw",
+      "location": "San Sebastian",
+      "date": "05.03.2025",
+      "vertical": false,
+      "album": "Spain"
+    },
+        {
+      "id": 33,
+      "imageSrc": "/images/DSCF1257.jpeg",
+      "name": "The Churro Cafe",
+      "location": "Barcelona",
+      "date": "08.03.2025",
+      "vertical": false,
+      "album": "Spain"
+    },
+    {
+      "id": 34,
+      "imageSrc": "/images/DSCF1377.jpeg",
+      "name": "The garden",
+      "location": "Barcelona",
+      "date": "09.03.2025",
+      "vertical": true,
+      "album": "Spain"
     }
+    
   ]

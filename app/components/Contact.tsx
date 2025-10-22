@@ -1,6 +1,6 @@
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
-const CONTACT_TEXT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec justo vel massa tristique dapibus. Curabitur vulputate, elit ut dictum varius, eros velit tempor quam, non hendrerit leo nulla non elit.";
+const CONTACT_TEXT = "Let’s grab a coffee! I love meeting new people and chatting about anything—especially tech, travel, or the Blue Jays.";
 const EMAIL = "evanlstpierre@gmail.com";
 const SUBJECT = "Let's%20Connect!";
 

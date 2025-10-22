@@ -48,7 +48,7 @@ export default function Intro() {
             if (json.lastGameRsp?.jaysWin) {
               setIntroWords(prev => [
                 ...prev,
-                "Jays won there last game,"+ json.lastGameRsp?.jaysScore + "-"+ json.lastGameRsp?.opponentScore +"!",
+                "Jays won their last game,"+ json.lastGameRsp?.jaysScore + "-"+ json.lastGameRsp?.opponentScore +"!",
               ]);
             } else {
               console.log('⚾ The Jays lost.');

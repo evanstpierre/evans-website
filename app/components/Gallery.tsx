@@ -105,8 +105,9 @@ const Albums:string[] = [
           ))}
           {isAlbum == 1 && sortedPhotos2.map((img) => (
             <div
-              className={`relative group flex items-center justify-center flex-none h-[250px] ${
-                img.vertical ? "w-[167px]" : "max-w-[375px]" 
+              key={img.id} // ✅ unique key for each image
+              className={`relative group flex items-center justify-center flex-none  ${
+                img.vertical ? "w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
               }`}
             >
                   <Image
