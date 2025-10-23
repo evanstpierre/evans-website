@@ -1,5 +1,3 @@
 name = "evans-website"
 compatibility_date = "2025-10-23"
-
-# Tell Pages which directory to publish (static assets only)
 pages_build_output_dir = ".vercel/output/static"

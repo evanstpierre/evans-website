@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "build:cf": "next-on-pages",
     "postbuild": "rimraf .next/cache",
     "start": "next start",
     "lint": "next lint"
