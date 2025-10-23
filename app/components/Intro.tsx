@@ -59,7 +59,7 @@ export default function Intro() {
       }
       setIntroWords(prev => [
         ...prev,
-        "Lets Connet on Linkdin",
+        "Lets Connect and grab a coffee!",
       ]);
     }
 

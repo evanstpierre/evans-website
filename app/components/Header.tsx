@@ -8,7 +8,15 @@ export default function Header() {
           </a>
           
           <span className='anton text-2xl'>|</span>
-          <span className='anton text-2xl border-b-2 border-transparent hover:border-[#E86A33] transition-all duration-500 cursor-pointer'>Resume</span>
+          <a
+            href="/evan-st-pierre-resume.pdf"        
+            target="_blank"            
+            rel="noopener noreferrer"  
+          >
+            <span className="anton text-2xl border-b-2 border-transparent hover:border-[#E86A33] transition-all duration-500 cursor-pointer">
+              Resume
+            </span>
+          </a>
         </div>
     );
   }

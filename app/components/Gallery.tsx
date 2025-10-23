@@ -106,117 +106,117 @@ const Albums:string[] = [
           </div>
         </div>
             <div
-  className={[
-    "flex flex-col sm:flex-row w-full gap-1  mt-2 no-scrollbar smooth-scroll",
-    "sm:h-[250px] osm:overflow-y-auto",                 // desktop behavior
-    "overflow-y-hidden transition-[max-height] duration-700 ease-in-out",
-    isExpanded ? "max-h-[10000px]" : "max-h-[700px]"    // 👈 animates
-  ].join(" ")}
->
-          {isAlbum == 0 && sortedPhotos.map((img) => (
-            <div
-              key={img.id} // ✅ unique key for each image
-              className={`relative group flex items-center justify-center flex-none  ${
-                img.vertical ? "  max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
-              }`}
+              className={[
+                "flex flex-col sm:flex-row w-full gap-1  mt-2 no-scrollbar smooth-scroll",
+                "sm:h-[250px] osm:overflow-y-auto",                 // desktop behavior
+                "overflow-y-hidden transition-[max-height] duration-700 ease-in-out",
+                isExpanded ? "max-h-[10000px]" : "max-h-[700px]"    // 👈 animates
+              ].join(" ")}
             >
-                  <Image
-            src={img.imageSrc}
-            alt={img.name}
-            fill
-            className="object-contain" // preserves aspect ratio, shows entire image
-          />
-              {/* Hover Overlay */}
-              <div   
-              className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-              
-              style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
+              {isAlbum == 0 && sortedPhotos.map((img) => (
+                <div
+                  key={img.id} // ✅ unique key for each image
+                  className={`relative group flex items-center justify-center flex-none  ${
+                    img.vertical ? "  max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
+                  }`}
                 >
-                <p className="text-[#F2E3DB] text-sm ">{img.location}</p>
-                <p className="text-[#F2E3DB] text-sm ">{img.date}</p>
-                
-              </div>
-              
-            </div>
-          ))}
-          {isAlbum == 1 && sortedPhotos2.map((img) => (
-            <div
-              key={img.id} // ✅ unique key for each image
-              className={`relative group flex items-center justify-center flex-none  ${
-                img.vertical ? " max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
-              }`}
-            >
-                  <Image
-            src={img.imageSrc}
-            alt={img.name}
-            fill
-            className="object-contain" // preserves aspect ratio, shows entire image
-          />
-              {/* Hover Overlay */}
-              <div   
-              className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-              
-              style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
+                      <Image
+                src={img.imageSrc}
+                alt={img.name}
+                fill
+                className="object-contain" // preserves aspect ratio, shows entire image
+              />
+                  {/* Hover Overlay */}
+                  <div   
+                  className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  
+                  style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
+                    >
+                    <p className="text-[#F2E3DB] text-sm ">{img.location}</p>
+                    <p className="text-[#F2E3DB] text-sm ">{img.date}</p>
+                    
+                  </div>
+                  
+                </div>
+              ))}
+              {isAlbum == 1 && sortedPhotos2.map((img) => (
+                <div
+                  key={img.id} // ✅ unique key for each image
+                  className={`relative group flex items-center justify-center flex-none  ${
+                    img.vertical ? " max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
+                  }`}
                 >
-                <p className="text-[#F2E3DB] text-sm ">{img.location}</p>
-                <p className="text-[#F2E3DB] text-sm ">{img.date}</p>
-                
-              </div>
-              
-            </div>
-          ))}
-           {isAlbum == 2 && sortedPhotos3.map((img) => (
-            <div
-              key={img.id} // ✅ unique key for each image
-              className={`relative group flex items-center justify-center flex-none  ${
-                img.vertical ? " max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
-              }`}
-            >
-                  <Image
-            src={img.imageSrc}
-            alt={img.name}
-            fill
-            className="object-contain" // preserves aspect ratio, shows entire image
-          />
-              {/* Hover Overlay */}
-              <div   
-              className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-              
-              style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
+                      <Image
+                src={img.imageSrc}
+                alt={img.name}
+                fill
+                className="object-contain" // preserves aspect ratio, shows entire image
+              />
+                  {/* Hover Overlay */}
+                  <div   
+                  className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  
+                  style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
+                    >
+                    <p className="text-[#F2E3DB] text-sm ">{img.location}</p>
+                    <p className="text-[#F2E3DB] text-sm ">{img.date}</p>
+                    
+                  </div>
+                  
+                </div>
+              ))}
+              {isAlbum == 2 && sortedPhotos3.map((img) => (
+                <div
+                  key={img.id} // ✅ unique key for each image
+                  className={`relative group flex items-center justify-center flex-none  ${
+                    img.vertical ? " max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
+                  }`}
                 >
-                <p className="text-[#F2E3DB] text-sm ">{img.location}</p>
-                <p className="text-[#F2E3DB] text-sm ">{img.date}</p>
-                
-              </div>
-              
-            </div>
-          ))}
-          {isAlbum == 3 && sortedPhotos4.map((img) => (
-            <div
-              key={img.id} // ✅ unique key for each image
-              className={`relative group flex items-center justify-center flex-none  ${
-                img.vertical ? " max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
-              }`}
-            >
-                  <Image
-            src={img.imageSrc}
-            alt={img.name}
-            fill
-            className="object-contain" // preserves aspect ratio, shows entire image
-          />
-              {/* Hover Overlay */}
-              <div   
-              className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-              
-              style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
+                      <Image
+                src={img.imageSrc}
+                alt={img.name}
+                fill
+                className="object-contain" // preserves aspect ratio, shows entire image
+              />
+                  {/* Hover Overlay */}
+                  <div   
+                  className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  
+                  style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
+                    >
+                    <p className="text-[#F2E3DB] text-sm ">{img.location}</p>
+                    <p className="text-[#F2E3DB] text-sm ">{img.date}</p>
+                    
+                  </div>
+                  
+                </div>
+              ))}
+              {isAlbum == 3 && sortedPhotos4.map((img) => (
+                <div
+                  key={img.id} // ✅ unique key for each image
+                  className={`relative group flex items-center justify-center flex-none  ${
+                    img.vertical ? " max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
+                  }`}
                 >
-                <p className="text-[#F2E3DB] text-sm ">{img.location}</p>
-                <p className="text-[#F2E3DB] text-sm ">{img.date}</p>
-                
-              </div>
-              
-            </div>
-          ))}
+                      <Image
+                src={img.imageSrc}
+                alt={img.name}
+                fill
+                className="object-contain" // preserves aspect ratio, shows entire image
+              />
+                  {/* Hover Overlay */}
+                  <div   
+                  className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  
+                  style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
+                    >
+                    <p className="text-[#F2E3DB] text-sm ">{img.location}</p>
+                    <p className="text-[#F2E3DB] text-sm ">{img.date}</p>
+                    
+                  </div>
+                  
+                </div>
+              ))}
         </div >
         <div className='flex  sm:hidden justify-center items-center w-full h-[20px] bg-[#E86A33] rounded-t-none rounded-b-xl'
            onClick={() => setIsExpanded(!isExpanded)}
