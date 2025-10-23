@@ -14,22 +14,6 @@ export default function Home() {
 const [data, setData] = useState(null);
 const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  async function fetchData() {
-    try {
-      const res = await fetch("/api/data");
-      if (!res.ok) throw new Error("Network response was not ok");
-      const json = await res.json();
-      setData(json);
-    } catch (err) {
-      console.error("❌ Fetch failed:", err);
-    } finally {
-      setLoading(false);
-    }
-  }
-  fetchData();
-}, []);
-
 
   return (
     <main className="min-h-screen p-5 sm:p-10 pb-20 grid place-items-center gap-y-20">
