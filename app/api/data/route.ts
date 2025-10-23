@@ -1,6 +1,6 @@
 // app/api/data/route.ts
 import {  NextResponse } from 'next/server';
-import info from '@/app/lib/info.json'; // ✅ new path
+import info from '@/lib/info.json'; // ✅ new path
 
 export async function GET() {
   return NextResponse.json({ data: info });
