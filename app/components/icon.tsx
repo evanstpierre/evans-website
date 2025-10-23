@@ -11,7 +11,7 @@ type IconProps = {
   className?: string;
 };
 
-export const Icon: React.FC<IconProps> = ({
+const Icon: React.FC<IconProps> = ({
   name,
   fill = 0,
   weight = 400,
@@ -32,3 +32,5 @@ export const Icon: React.FC<IconProps> = ({
     </span>
   );
 };
+
+export default Icon;
