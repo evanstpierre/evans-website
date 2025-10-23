@@ -24,3 +24,31 @@ services:
     restart: always
     command: ["npm", "run", "dev"]
     
+  next-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    profiles: ["prod"]
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: "production"
+      HOSTNAME: "0.0.0.0"
+      PORT: "3000"
+      # Provide only server-side env here (no NEXT_PUBLIC_ secrets)
+      BASE_URL: ${BASE_URL}
+      STRAVA_CLIENT_ID: ${STRAVA_CLIENT_ID}
+      STRAVA_ATHLETE_ID: ${STRAVA_ATHLETE_ID}
+      STRAVA_CLIENT_SECRET: ${STRAVA_CLIENT_SECRET}
+      STRAVA_ACCESS_TOKEN: ${STRAVA_ACCESS_TOKEN}
+      STRAVA_REFRESH_TOKEN: ${STRAVA_REFRESH_TOKEN}
+      STRAVA_AUTH_CODE: ${STRAVA_AUTH_CODE}
+      STRAVA_EXPIRES_AT: ${STRAVA_EXPIRES_AT}
+    # No volumes in prod; we run the built app
+    restart: always
+    command: ["npm", "run", "start"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 20s
+      timeout: 5s
+      retries: 5

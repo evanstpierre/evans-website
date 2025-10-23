@@ -110,7 +110,7 @@ const Albums:string[] = [
                 "flex flex-col sm:flex-row w-full gap-1  mt-2 no-scrollbar smooth-scroll",
                 "sm:h-[250px] osm:overflow-y-auto",                 // desktop behavior
                 "overflow-y-hidden transition-[max-height] duration-700 ease-in-out",
-                isExpanded ? "max-h-[10000px]" : "max-h-[700px]"    // 👈 animates
+                isExpanded ? "max-h-[15000px]" : "max-h-[700px]"    // 👈 animates
               ].join(" ")}
             >
               {isAlbum == 0 && sortedPhotos.map((img) => (
