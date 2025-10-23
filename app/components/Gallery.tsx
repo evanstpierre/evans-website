@@ -2,6 +2,7 @@
 import { Album } from '@mui/icons-material';
 import Image from 'next/image'
 import { use, useEffect, useState } from 'react';
+import { Icon } from '@mui/material';
 
 
 type Photo = {
@@ -72,16 +73,46 @@ const Albums:string[] = [
     }
 
 
-
-        //   <div className="overflow-hidden max-w-[850px] h-[340px] bg-[#F2E3DB] px-0 py-3 rounded shadow">
-        // <div className="flex flex-nowrap  h-[250px]  gap-1 overflow-x-auto !scroll-smooth no-scrollbar px-2"></div>
-        //  h-[250px]
-
     return (
-        <div className="overflow-hidden  sm:h-[340px] max-w-[400px] sm:max-w-[850px] bg-[#F2E3DB] px-3 py-5 rounded shadow">
-          <div className={`flex flex-col sm:flex-row w-full sm:h-[250px] gap-1 overflow-y-hidden sm:overflow-y-auto  no-scrollbar smooth-scroll
-            ${isExpanded ? "":"max-h-[700px]"}
-            `}>
+        <div className="overflow-hidden  sm:h-[350px] max-w-[400px] sm:max-w-[850px] bg-[#F2E3DB] px-3 py-5 rounded shadow">
+        <div className='flex justify-centeritems-center gap-2'>
+          <div 
+            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==0? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
+            onClick={() => setIsAlbum(0)}
+          >
+            Morocco
+          </div>
+          <div 
+            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==1? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
+            onClick={() => setIsAlbum(1)}
+          >
+            Spain
+          </div>
+          <div 
+            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==2? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
+            onClick={() => 
+              setIsAlbum(2)
+            }
+          >
+           Denmark
+          </div>
+                    <div 
+            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==3? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
+            onClick={() => 
+              setIsAlbum(3)
+            }
+          >
+           Italy
+          </div>
+        </div>
+            <div
+  className={[
+    "flex flex-col sm:flex-row w-full gap-1  mt-2 no-scrollbar smooth-scroll",
+    "sm:h-[250px] osm:overflow-y-auto",                 // desktop behavior
+    "overflow-y-hidden transition-[max-height] duration-700 ease-in-out",
+    isExpanded ? "max-h-[10000px]" : "max-h-[700px]"    // 👈 animates
+  ].join(" ")}
+>
           {isAlbum == 0 && sortedPhotos.map((img) => (
             <div
               key={img.id} // ✅ unique key for each image
@@ -187,42 +218,23 @@ const Albums:string[] = [
             </div>
           ))}
         </div >
-        <div className='flex sm:hidden justify-center w-full h-[15px] bg-[#E86A33]'
+        <div className='flex  sm:hidden justify-center items-center w-full h-[20px] bg-[#E86A33] rounded-t-none rounded-b-xl'
            onClick={() => setIsExpanded(!isExpanded)}
         >
-            ^
+       { <Icon
+                  sx={{
+                  fontFamily: "Material Symbols Outlined",
+                  fontSize: 32,
+                  fontVariationSettings:
+                      "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48",
+                  lineHeight: 1,
+                  }}
+              >
+                {isExpanded? "arrow_drop_up":"arrow_drop_down"}
+              </Icon>}
         </div>
 
-        <div className='flex justify-centeritems-center p-2 gap-x-2'>
-          <div 
-            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==0? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
-            onClick={() => setIsAlbum(0)}
-          >
-            Morocco
-          </div>
-          <div 
-            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==1? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
-            onClick={() => setIsAlbum(1)}
-          >
-            Spain
-          </div>
-          <div 
-            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==2? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
-            onClick={() => 
-              setIsAlbum(2)
-            }
-          >
-           Denmark
-          </div>
-                    <div 
-            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==3? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
-            onClick={() => 
-              setIsAlbum(3)
-            }
-          >
-           Italy
-          </div>
-        </div>
+
       </div>
     )
   }

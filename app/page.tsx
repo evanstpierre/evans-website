@@ -44,15 +44,16 @@ useEffect(() => {
               Whe I’m not learning about computers/math I am probably cycling. I love exploring new places and drinking a nice cup of coffee [preferably a pour over]. I am proud Toronto local who is a passionate Maple Leafs and Blue Jays fan.
               </p>}
             </div>
-          
+        
+            <div className='flex flex-col gap-y-2'>
+              <span className='opacity-75 text-xl ml-1'>Here is how much I have cycled in the past year.</span>
+              <ActivityStats />
+            </div>
+            
             <div className='flex flex-col gap-y-2'>
 
               <span className='opacity-75 text-xl ml-1'>Photos from my recent travels.</span>
               <Gallery />
-            </div>
-            <div className='flex flex-col gap-y-2'>
-              <span className='opacity-75 text-xl ml-1'>Here is how much I have cycled in the past year.</span>
-              <ActivityStats />
             </div>
           
           </div>

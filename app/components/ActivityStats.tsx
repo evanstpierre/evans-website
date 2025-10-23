@@ -49,10 +49,9 @@ export default function ActivityStats() {
             <div className="absolute top-2 right-2">
 
                 <div
-                onClick={() =>   (window.innerWidth < 640) ?  setExpanded(!expanded) : "" }
-                className={`bg-[#D97C42] text-[#F3E2D3] rounded-full px-0.5 h-8 group flex flex-row justify-between items-center transition-all duration-700
+                onClick={ () => setExpanded(!expanded) }
+                className={`bg-[#D97C42] text-[#F3E2D3] rounded-full px-0.5 h-8 group flex flex-row justify-between items-center transition-all duration-700 sm:opacity-75
                     ${expanded ? "w-[300px]" : "w-auto"}
-                    ${(window.innerWidth < 640) ? "opacity-100" :  "opacity-75"}
                     sm:w-auto sm:hover:w-[300px] sm:hover:opacity-100
                 `}
                 >
