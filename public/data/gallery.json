@@ -370,7 +370,7 @@
       "vertical": false,
       "album": "Denmark"
     },
-         {
+    {
       "id": 40,
       "imageSrc": "/images/DSCF1700.jpeg",
       "name": "Outside the Metro",
@@ -378,6 +378,97 @@
       "date": "07.06.2025",
       "vertical": false,
       "album": "Denmark"
+    },
+    {
+      "id": 41,
+      "imageSrc": "/images/DSCF1524.jpeg",
+      "name": "At The beach",
+      "location": "Monterosso al Mare",
+      "date": "01.06.2025",
+      "vertical": true,
+      "album": "Italy"
+    },
+        {
+      "id": 42,
+      "imageSrc": "/images/DSCF1529.jpeg",
+      "name": "",
+      "location": "Monterosso al Mare",
+      "date": "01.06.2025",
+      "vertical": false,
+      "album": "Italy"
+    },
+        {
+      "id": 43,
+      "imageSrc": "/images/DSCF1558.jpeg",
+      "name": "",
+      "location": "Monterosso al Mare",
+      "date": "01.06.2025",
+      "vertical": false,
+      "album": "Italy"
+    },
+        {
+      "id": 44,
+      "imageSrc": "/images/DSCF1570.jpeg",
+      "name": "At the piazza",
+      "location": "Lucca",
+      "date": "02.06.2025",
+      "vertical": false,
+      "album": "Italy"
+    },
+        {
+      "id": 45,
+      "imageSrc": "/images/DSCF1590.jpeg",
+      "name": "The storefront",
+      "location": "Lucca",
+      "date": "02.06.2025",
+      "vertical": false,
+      "album": "Italy"
+    },
+        {
+      "id": 46,
+      "imageSrc": "/images/DSCF1593.jpeg",
+      "name": "",
+      "location": "Florence",
+      "date": "03.06.2025",
+      "vertical": false,
+      "album": "Italy"
+    },
+        {
+      "id": 47,
+      "imageSrc": "/images/DSCF1596.jpeg",
+      "name": "The big church",
+      "location": "Florence",
+      "date": "03.06.2025",
+      "vertical": true,
+      "album": "Italy"
+    },
+        {
+      "id": 48,
+      "imageSrc": "/images/DSCF1601.jpeg",
+      "name": "The Bar",
+      "location": "Florence",
+      "date": "03.06.2025",
+      "vertical": true,
+      "album": "Italy"
+    },
+        {
+      "id": 49,
+      "imageSrc": "/images/DSCF1611.jpeg",
+      "name": "The Fountain",
+      "location": "Lucca",
+      "date": "04.06.2025",
+      "vertical": true,
+      "album": "Italy"
+    },
+    {
+      "id": 50,
+      "imageSrc": "/images/DSCF1624.jpeg",
+      "name": "The Garden",
+      "location": "Lucca",
+      "date": "05.06.2025",
+      "vertical": true,
+      "album": "Italy"
     }
+        
     
   ]

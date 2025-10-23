@@ -32,6 +32,7 @@ const Albums:string[] = [
     const [photos, setPhotos] = useState<Photo[]>([]);
     const [loading, setLoading] = useState(true);
     const [isAlbum, setIsAlbum] = useState(0)
+    const [isExpanded, setIsExpanded] = useState(false);
 
 
     useEffect(() => {
@@ -59,6 +60,8 @@ const Albums:string[] = [
     const sortedPhotos = photos.filter((img) => img.album === 'Morocco');
     const sortedPhotos2 = photos.filter((img) => img.album === 'Spain');
     const sortedPhotos3 = photos.filter((img) => img.album === 'Denmark');
+    const sortedPhotos4 = photos.filter((img) => img.album === 'Italy');
+
 
     if (loading) {
       return (
@@ -75,13 +78,15 @@ const Albums:string[] = [
         //  h-[250px]
 
     return (
-        <div className="overflow-hidden h-[880px] sm:h-[340px] max-w-[400px] sm:max-w-[850px] bg-[#F2E3DB] px-3 py-5 rounded shadow">
-          <div className="flex flex-col sm:flex-row w-full h-[700px] sm:h-[250px] gap-1 overflow-y-auto sm:overflow-y-auto  no-scrollbar smooth-scroll">
+        <div className="overflow-hidden  sm:h-[340px] max-w-[400px] sm:max-w-[850px] bg-[#F2E3DB] px-3 py-5 rounded shadow">
+          <div className={`flex flex-col sm:flex-row w-full sm:h-[250px] gap-1 overflow-y-hidden sm:overflow-y-auto  no-scrollbar smooth-scroll
+            ${isExpanded ? "":"max-h-[700px]"}
+            `}>
           {isAlbum == 0 && sortedPhotos.map((img) => (
             <div
               key={img.id} // ✅ unique key for each image
               className={`relative group flex items-center justify-center flex-none  ${
-                img.vertical ? "w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
+                img.vertical ? "  max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
               }`}
             >
                   <Image
@@ -92,7 +97,7 @@ const Albums:string[] = [
           />
               {/* Hover Overlay */}
               <div   
-              className={`absolute top-0 left-0 h-[250px] border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+              className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               
               style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
                 >
@@ -107,7 +112,7 @@ const Albums:string[] = [
             <div
               key={img.id} // ✅ unique key for each image
               className={`relative group flex items-center justify-center flex-none  ${
-                img.vertical ? "w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
+                img.vertical ? " max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
               }`}
             >
                   <Image
@@ -118,7 +123,7 @@ const Albums:string[] = [
           />
               {/* Hover Overlay */}
               <div   
-              className={`absolute top-0 left-0 h-[250px] border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+              className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               
               style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
                 >
@@ -133,7 +138,7 @@ const Albums:string[] = [
             <div
               key={img.id} // ✅ unique key for each image
               className={`relative group flex items-center justify-center flex-none  ${
-                img.vertical ? "w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
+                img.vertical ? " max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
               }`}
             >
                   <Image
@@ -144,7 +149,33 @@ const Albums:string[] = [
           />
               {/* Hover Overlay */}
               <div   
-              className={`absolute top-0 left-0 h-[250px] border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+              className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+              
+              style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
+                >
+                <p className="text-[#F2E3DB] text-sm ">{img.location}</p>
+                <p className="text-[#F2E3DB] text-sm ">{img.date}</p>
+                
+              </div>
+              
+            </div>
+          ))}
+          {isAlbum == 3 && sortedPhotos4.map((img) => (
+            <div
+              key={img.id} // ✅ unique key for each image
+              className={`relative group flex items-center justify-center flex-none  ${
+                img.vertical ? " max-w-[375px] sm:w-[167px] aspect-[2/3]" : " max-w-[375px] aspect-[3/2]" 
+              }`}
+            >
+                  <Image
+            src={img.imageSrc}
+            alt={img.name}
+            fill
+            className="object-contain" // preserves aspect ratio, shows entire image
+          />
+              {/* Hover Overlay */}
+              <div   
+              className={`absolute top-0 left-0 h-full border-2 border-[#263A29] w-full flex items-end justify-end p-1 flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               
               style={{ backgroundColor: 'rgba(242, 227, 219, 0.50)'}}
                 >
@@ -156,12 +187,12 @@ const Albums:string[] = [
             </div>
           ))}
         </div >
-        <div className=' sm:hidden flex justify-center items-center p-2 gap-x-2'>
-          <div className='rounded flex justify-center items-center w-[350px] h-[55px] bg-[#263A29]'>
-            More Photos
-          </div>
-      
+        <div className='flex sm:hidden justify-center w-full h-[15px] bg-[#E86A33]'
+           onClick={() => setIsExpanded(!isExpanded)}
+        >
+            ^
         </div>
+
         <div className='flex justify-centeritems-center p-2 gap-x-2'>
           <div 
             className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==0? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
@@ -175,11 +206,21 @@ const Albums:string[] = [
           >
             Spain
           </div>
-                    <div 
+          <div 
             className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==2? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
-            onClick={() => setIsAlbum(2)}
+            onClick={() => 
+              setIsAlbum(2)
+            }
           >
            Denmark
+          </div>
+                    <div 
+            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==3? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
+            onClick={() => 
+              setIsAlbum(3)
+            }
+          >
+           Italy
           </div>
         </div>
       </div>
