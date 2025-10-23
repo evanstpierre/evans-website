@@ -1,5 +1,5 @@
 
-
+'use server';
 // app/api/strava/route.t
 import { NextRequest, NextResponse } from "next/server";
 import { updateEnvVars } from "@/app/utils/updateEnv";
