@@ -21,6 +21,7 @@ export default function ActivityStats() {
     const BASE_URL = process.env.BASE_URL;
     const [totals, setTotals] = useState<RideTotals | null>(null);
     const [loading, setLoading] = useState(true);
+    const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
         const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -46,33 +47,34 @@ export default function ActivityStats() {
     return(
         <div className="relative bg-[#263A29] h-[200px] w-full max-w-[850px] rounded shadow p-4">
             <div className="absolute top-2 right-2">
-                {/* <div className="bg-[#D97C42] text-[#F3E2D3] rounded-full px-1 h-8 group-hover:w-[320px] flex items-center justify-center opacity-75 hover:opacity-100">
-                    <span className='hidden group-hover:inline ml-2'>All data is synced with my Strava account </span>
-                    <Icon
-                        sx={{
-                        fontFamily: 'Material Symbols Outlined',
-                        fontSize: 32,
-                        fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48",
-                        lineHeight: 1,
-                        }}
-                    >
-                        info
-                    </Icon>
-                </div> */}
-                <div className="bg-[#D97C42] text-[#F3E2D3] rounded-full px-0.5 h-8 group hover:w-[300px] flex flex-row justify-between items-center opacity-75 hover:opacity-100 transition-all duration-750">
-                    <span className="hidden group-hover:inline ml-2">
-                        All data is synced with my Strava account
-                    </span>
-                    <Icon
-                        sx={{
-                        fontFamily: 'Material Symbols Outlined',
-                        fontSize: 32,
-                        fontVariationSettings: "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48",
-                        lineHeight: 1,
-                        }}
-                    >
-                        info
-                    </Icon>
+
+                <div
+                onClick={() =>   (window.innerWidth < 640) ?  setExpanded(!expanded) : "" }
+                className={`bg-[#D97C42] text-[#F3E2D3] rounded-full px-0.5 h-8 group flex flex-row justify-between items-center transition-all duration-700
+                    ${expanded ? "w-[300px]" : "w-auto"}
+                    ${(window.innerWidth < 640) ? "opacity-100" :  "opacity-75"}
+                    sm:w-auto sm:hover:w-[300px] sm:hover:opacity-100
+                `}
+                >
+                <span
+                    className={`ml-2 whitespace-nowrap transition-opacity duration-500 ${
+                    expanded ? "inline" : "hidden sm:group-hover:inline"
+                    }`}
+                >
+                    All data is synced with my Strava account
+                </span>
+
+                <Icon
+                    sx={{
+                    fontFamily: "Material Symbols Outlined",
+                    fontSize: 32,
+                    fontVariationSettings:
+                        "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48",
+                    lineHeight: 1,
+                    }}
+                >
+                    info
+                </Icon>
                 </div>
             </div>
         <div className="text-[#F2E3DBBF] mt-10 flex flex-collumn justify-evenly">

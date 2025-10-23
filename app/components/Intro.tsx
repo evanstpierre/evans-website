@@ -82,12 +82,14 @@ export default function Intro() {
           deleteSpeed={50}
           delaySpeed={1500}
         /></p>
-        <button 
+
+        <a href="#contact-me" className="flex items-center justify-center w-[75px] h-[40px] bg-[#E86A33] rounded-md cursor-pointer opacity-75 hover:opacity-100">Connect</a>
+        {/* <button 
           className="w-[75px] h-[40px] bg-[#E86A33] rounded-md cursor-pointer opacity-75 hover:opacity-100"
-          onClick={() => window.open('https://www.linkedin.com/in/evan-st-pierre/', '_blank')}
+          onClick={() => window.open('#contact-me')}
         >
           Connect 
-        </button>
+        </button> */}
         <p className="text-md sm:text-l md:text-xl opacity-75">
         I am a new Grad with a degree in Computer Science Grad who is seeking job opportunities. 
         </p>
