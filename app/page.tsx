@@ -25,7 +25,7 @@ const [loading, setLoading] = useState(true);
             <div className='flex flex-col gap-y-1'>
               <h1 className='anton text-3xl'>Hobbies</h1>
             { <p className='max-w-[375px] md:max-w-[600px] opacity-75 text-xl'>
-              Whe I’m not learning about computers/math I am probably cycling. I love exploring new places and drinking a nice cup of coffee [preferably a pour over]. I am proud Toronto local who is a passionate Maple Leafs and Blue Jays fan.
+             {DEFAULT_INTRO}
               </p>}
             </div>
         

@@ -9,15 +9,6 @@
       "album": "Morocco"
     },
     {
-      "id": 2,
-      "imageSrc": "/images/DSCF1365.jpeg",
-      "name": "Garden",
-      "location": "Barcelona",
-      "date": "09.03.2025",
-      "vertical": true,
-      "album": "Spain"
-    },
-    {
       "id": 5,
       "imageSrc": "/images/DSCF0086.jpeg",
       "name": "Blue House",
@@ -42,15 +33,6 @@
       "location": "Marrakesh",
       "date": "06.02.2025",
       "vertical": false,
-      "album": "Morocco"
-    },
-    {
-      "id": 16,
-      "imageSrc": "/images/DSCF0144.jpeg",
-      "name": "Mandresa",
-      "location": "Marrakesh",
-      "date": "07.02.2025",
-      "vertical": true,
       "album": "Morocco"
     },
     {
@@ -99,40 +81,12 @@
       "album": "Morocco"
     },
     {
-      "id": 18,
-      "imageSrc": "/images/DSCF0440.jpeg",
-      "name": "Village",
-      "location": "Aït Benhaddou",
-      "date": "09.02.2025",
-      "vertical": false,
-      "album": "Morocco"
-    },
-    {
       "id": 19,
       "imageSrc": "/images/DSCF0447.jpeg",
       "name": "Village Shops",
       "location": "Aït Benhaddou",
       "date": "09.02.2025",
       "vertical": true,
-      "album": "Morocco"
-    },
-    {
-  
-      "id": 17,
-      "imageSrc": "/images/DSCF0500.jpeg",
-      "name": "Desert Bulgarians",
-      "location": "Merzouga",
-      "date": "10.02.2025",
-      "vertical": false,
-      "album": "Morocco"
-    },
-    {
-      "id": 12,
-      "imageSrc": "/images/DSCF0517.jpeg",
-      "name": "Camel POV",
-      "location": "Merzouga",
-      "date": "10.02.2025",
-      "vertical": false,
       "album": "Morocco"
     },
     {
@@ -145,15 +99,6 @@
       "album": "Morocco"
     },
     
-    {
-      "id": 13,
-      "imageSrc": "/images/DSCF0571.jpeg",
-      "name": "Beach POV",
-      "location": "Tamranght",
-      "date": "13.02.2025",
-      "vertical": false,
-      "album": "Morocco"
-    },
     {
       "id": 21,
       "imageSrc": "/images/DSCF0580.jpeg",
@@ -209,36 +154,9 @@
       "album": "Morocco"
     },
     {
-      "id": 27,
-      "imageSrc": "/images/DSCF0710.jpeg",
-      "name": "Dye Alley",
-      "location": "Fes",
-      "date": "17.02.2025",
-      "vertical": true,
-      "album": "Morocco"
-    },
-    {
-      "id": 24,
-      "imageSrc": "/images/DSCF0724.jpeg",
-      "name": "Butchers at Work",
-      "location": "Morocco",
-      "date": "17.02.2025",
-      "vertical": false,
-      "album": "Morocco"
-    },
-    {
       "id": 26,
       "imageSrc": "/images/DSCF0739.jpeg",
       "name": "Man in Truck with Oranges",
-      "location": "Morocco",
-      "date": "17.02.2025",
-      "vertical": false,
-      "album": "Morocco"
-    },
-    {
-      "id": 25,
-      "imageSrc": "/images/DSCF0751.jpeg",
-      "name": "Group of Men Playing Cards",
       "location": "Morocco",
       "date": "17.02.2025",
       "vertical": false,
@@ -320,6 +238,15 @@
       "id": 34,
       "imageSrc": "/images/DSCF1377.jpeg",
       "name": "The garden",
+      "location": "Barcelona",
+      "date": "09.03.2025",
+      "vertical": true,
+      "album": "Spain"
+    },
+    {
+      "id": 2,
+      "imageSrc": "/images/DSCF1365.jpeg",
+      "name": "Garden",
       "location": "Barcelona",
       "date": "09.03.2025",
       "vertical": true,

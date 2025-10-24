@@ -1,5 +1,4 @@
 "use client"
-import { Album } from '@mui/icons-material';
 import Image from 'next/image'
 import { useEffect, useState, useRef } from 'react';
 import { Icon } from '@mui/material';
