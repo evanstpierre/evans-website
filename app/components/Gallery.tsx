@@ -1,9 +1,8 @@
 "use client"
 import { Album } from '@mui/icons-material';
 import Image from 'next/image'
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Icon } from '@mui/material';
-
 
 type Photo = {
   id: number;
@@ -22,7 +21,6 @@ type Photo = {
 
 
 
-
 const Albums:string[] = [
   "Morocco",
   "Spain",
@@ -33,7 +31,7 @@ const Albums:string[] = [
     const [photos, setPhotos] = useState<Photo[]>([]);
     const [loading, setLoading] = useState(true);
     const [isAlbum, setIsAlbum] = useState(0)
-    const [isExpanded, setIsExpanded] = useState(false);
+    const scrollRef = useRef<HTMLDivElement>(null);
 
 
     useEffect(() => {
@@ -72,46 +70,79 @@ const Albums:string[] = [
       );
     }
 
+    const downToggle = () => {
+       
+      if ( scrollRef.current) {
+        scrollRef.current.scrollBy({ top: 500, left: 0, behavior: "smooth" });
+      }
+
+
+  };
+  const upToggle = () => {
+       
+      if ( scrollRef.current) {
+        scrollRef.current.scrollBy({ top: -500, left: 0, behavior: "smooth" });
+      }
+
+
+  };
+
 
     return (
         <div className="overflow-hidden  sm:h-[350px] max-w-[400px] sm:max-w-[850px] bg-[#F2E3DB] px-3 py-5 rounded shadow">
-        <div className='flex justify-centeritems-center gap-2'>
-          <div 
-            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==0? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
-            onClick={() => setIsAlbum(0)}
-          >
-            Morocco
+          <div className='flex justify-centeritems-center gap-2'>
+            <div 
+              className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==0? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
+              onClick={() => setIsAlbum(0)}
+            >
+              Morocco
+            </div>
+            <div 
+              className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==1? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
+              onClick={() => setIsAlbum(1)}
+            >
+              Spain
+            </div>
+            <div 
+              className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==2? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
+              onClick={() => 
+                setIsAlbum(2)
+              }
+            >
+            Denmark
+            </div>
+                      <div 
+              className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==3? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
+              onClick={() => 
+                setIsAlbum(3)
+              }
+            >
+            Italy
+            </div>
           </div>
-          <div 
-            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==1? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
-            onClick={() => setIsAlbum(1)}
-          >
-            Spain
-          </div>
-          <div 
-            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==2? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
-            onClick={() => 
-              setIsAlbum(2)
-            }
-          >
-           Denmark
-          </div>
-                    <div 
-            className={`w-[175px] h-[55px] rounded flex justify-center items-center cursor-pointer ${isAlbum==3? " bg-[#263A29]": "border-2 border-[#263A29]  text-[#263A29]"}` }
-            onClick={() => 
-              setIsAlbum(3)
-            }
-          >
-           Italy
-          </div>
-        </div>
+          <div className='flex  sm:hidden justify-center items-center mt-2 w-full h-[20px] bg-[#E86A33] rounded-t-xl rounded-b-non'
+                  onClick={upToggle}
+                >
+              { <Icon
+                          sx={{
+                          fontFamily: "Material Symbols Outlined",
+                          fontSize: 32,
+                          fontVariationSettings:
+                              "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48",
+                          lineHeight: 1,
+                          }}
+                      >
+                        arrow_drop_up
+                      </Icon>}
+                </div>
             <div
               className={[
-                "flex flex-col sm:flex-row w-full gap-1  mt-2 no-scrollbar smooth-scroll",
-                "sm:h-[250px] osm:overflow-y-auto",                 // desktop behavior
-                "overflow-y-hidden transition-[max-height] duration-700 ease-in-out",
-                isExpanded ? "max-h-[15000px]" : "max-h-[700px]"    // 👈 animates
+                "flex flex-col sm:flex-row w-full sm:mt-2 gap-1 no-scrollbar smooth-scroll",
+                "sm:h-[250px] overflow-y-auto",                 // desktop behavior
+                " transition-[max-height] duration-700 ease-in-out",
+                "h-[815px]"    // 👈 animates
               ].join(" ")}
+              ref={scrollRef}
             >
               {isAlbum == 0 && sortedPhotos.map((img) => (
                 <div
@@ -219,7 +250,7 @@ const Albums:string[] = [
               ))}
         </div >
         <div className='flex  sm:hidden justify-center items-center w-full h-[20px] bg-[#E86A33] rounded-t-none rounded-b-xl'
-           onClick={() => setIsExpanded(!isExpanded)}
+           onClick={() => downToggle()}
         >
        { <Icon
                   sx={{
@@ -230,7 +261,7 @@ const Albums:string[] = [
                   lineHeight: 1,
                   }}
               >
-                {isExpanded? "arrow_drop_up":"arrow_drop_down"}
+                arrow_drop_down
               </Icon>}
         </div>
 
