@@ -6,7 +6,6 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "build:cf": "next-on-pages",
-    "postbuild": "rimraf .next/cache",
     "start": "next start",
     "lint": "next lint"
   },
@@ -16,9 +15,8 @@
     "@heroicons/react": "^2.2.0",
     "@mui/icons-material": "^6.4.8",
     "@mui/material": "^6.4.8",
-    "@opennextjs/cloudflare": "^1.11.0",
     "classnames": "^2.5.1",
-    "next": "15.2.3",
+    "next": "^15.5.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
