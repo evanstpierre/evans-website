@@ -1,7 +1,8 @@
 "use client"
 import Image from 'next/image'
 import { useEffect, useState, useRef } from 'react';
-import { Icon } from '@mui/material';
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 type Photo = {
   id: number;
@@ -12,6 +13,7 @@ type Photo = {
   vertical: boolean;
   album: string;
 };
+
 
 
 
@@ -121,18 +123,7 @@ const Albums:string[] = [
           </div>
           <div className='flex  sm:hidden justify-center items-center mt-2 w-full h-[20px] bg-[#E86A33] rounded-t-xl rounded-b-non'
                   onClick={upToggle}
-                >
-              { <Icon
-                          sx={{
-                          fontFamily: "Material Symbols Outlined",
-                          fontSize: 32,
-                          fontVariationSettings:
-                              "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48",
-                          lineHeight: 1,
-                          }}
-                      >
-                        arrow_drop_up
-                      </Icon>}
+                > <ArrowDropUpIcon sx={{ fontSize: 32, color: "#F2E3DB" }} />
                 </div>
             <div
               className={[
@@ -251,17 +242,7 @@ const Albums:string[] = [
         <div className='flex  sm:hidden justify-center items-center w-full h-[20px] bg-[#E86A33] rounded-t-none rounded-b-xl'
            onClick={() => downToggle()}
         >
-       { <Icon
-                  sx={{
-                  fontFamily: "Material Symbols Outlined",
-                  fontSize: 32,
-                  fontVariationSettings:
-                      "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48",
-                  lineHeight: 1,
-                  }}
-              >
-                arrow_drop_down
-              </Icon>}
+       { <ArrowDropDownIcon sx={{ fontSize: 32, color: "#F2E3DB" }} />}
         </div>
 
 

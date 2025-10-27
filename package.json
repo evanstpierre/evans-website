@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "build:cf": "next-on-pages",
     "start": "next start",
     "lint": "next lint"
   },
@@ -30,7 +29,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.2.3",
+    "eslint-config-next": "^15.5.6",
     "rimraf": "^6.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
