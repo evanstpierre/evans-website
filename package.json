@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "i18n:compile": "npx @inlang/paraglide-js compile --project ./project.inlang --outdir ./src/paraglide",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@inlang/paraglide-js": "^2.4.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
