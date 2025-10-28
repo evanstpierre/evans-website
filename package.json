@@ -2,12 +2,14 @@
   "name": "evans-crazy-website",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "i18n:compile": "npx @inlang/paraglide-js compile --project ./project.inlang --outdir ./src/paraglide",
+    "i18n:compile": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "rimraf .next node_modules"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

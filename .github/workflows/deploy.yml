@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  # optional: allow manual trigger from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,27 +14,29 @@ jobs:
 
     steps:
       - name: 🧾 Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: 🧩 Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'pnpm'
 
-      - name: 📦 Install pnpm
-        run: npm install -g pnpm
+      - name: 📦 Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
 
-      - name: 📚 Install dependencies
-        working-directory: ./apps/dashboard
+      - name: 📚 Install dependencies (root)
         run: pnpm install
 
+      # if you only want to install & build the dashboard app in a monorepo
       - name: 🏗️ Build project
-        working-directory: ./apps/dashboard
-        run: pnpm run build
+        run: pnpm --filter "./apps/dashboard" run build
 
       - name: 📤 Export project
-        working-directory: ./apps/dashboard
-        run: pnpm run export
+        run: pnpm --filter "./apps/dashboard" run export
 
       - name: 🚀 Deploy to Cloudflare Pages
         env:
