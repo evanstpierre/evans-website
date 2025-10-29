@@ -36,11 +36,13 @@ jobs:
         run: pnpm --filter "./apps/dashboard" run export
 
       - name: 🚀 Deploy to Cloudflare Pages
+        working-directory: ./apps/dashboard
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_PROJECT_NAME: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+            CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+            CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+            CLOUDFLARE_PROJECT_NAME: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
         run: |
-          npx wrangler pages publish ./apps/dashboard/out \
-            --project-name="$CLOUDFLARE_PROJECT_NAME" \
-            --branch=main
+            npx wrangler whoami
+            npx wrangler pages deploy ./out \
+            --project-name "$CLOUDFLARE_PROJECT_NAME" \
+            --branch main
