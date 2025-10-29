@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "i18n:compile": "paraglide-js compile --project ./src/project.inlang --outdir ./src/paraglide",
+    "i18n:compile": "paraglide-js compile --project ./project.inlang --outdir ./paraglide",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
