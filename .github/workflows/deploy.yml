@@ -24,12 +24,12 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      # (Optional) if your i18n needs a precompile step, uncomment:
-      # - name: 🌐 Compile i18n
-      #   run: pnpm run i18n:compile
-
       - name: 📚 Install dependencies
         run: pnpm install
+
+      # Compile Paraglide before building Next
+      - name: 🌐 Compile i18n (Paraglide)
+        run: pnpm run i18n:compile
 
       - name: 🏗️ Build (static export to ./out)
         run: pnpm run build
