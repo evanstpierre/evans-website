@@ -1,4 +1,3 @@
-
-name = "dashboard"                    # optional
-pages_build_output_dir = "out"        # REQUIRED for Pages if you have a wrangler.toml
-compatibility_date = "2025-10-29"     # any recent date is fine
+# wrangler.toml (repo root)
+pages_build_output_dir = "out"
+compatibility_date = "2025-10-29"

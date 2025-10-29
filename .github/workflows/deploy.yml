@@ -8,13 +8,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: devbuild
 
     steps:
       - name: 🧾 Checkout repository
         uses: actions/checkout@v4
 
-      # Let the action read pnpm version from package.json's "packageManager"
       - name: 📦 Set up pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -26,22 +24,26 @@ jobs:
           node-version: 20
           cache: pnpm
 
+      # (Optional) if your i18n needs a precompile step, uncomment:
+      # - name: 🌐 Compile i18n
+      #   run: pnpm run i18n:compile
+
       - name: 📚 Install dependencies
         run: pnpm install
 
-      - name: 🏗️ Build project
-        run: pnpm --filter "./apps/dashboard" run build
+      - name: 🏗️ Build (static export to ./out)
+        run: pnpm run build
 
-      - name: 📤 Export project
-        run: pnpm --filter "./apps/dashboard" run export
+      - name: 🧭 Verify out/
+        run: ls -la out
 
       - name: 🚀 Deploy to Cloudflare Pages
-        working-directory: apps/dashboard   # remove leading ./
         env:
-            CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-            CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-            CLOUDFLARE_PROJECT_NAME: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PROJECT_NAME: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
         run: |
-            npx wrangler pages deploy out \
+          npx wrangler whoami
+          npx wrangler pages deploy out \
             --project-name "$CLOUDFLARE_PROJECT_NAME" \
             --branch main
