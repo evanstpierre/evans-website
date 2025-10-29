@@ -1,5 +1,7 @@
-'use server';
+// 'use server'; // not required in a Route Handler, ok to remove
 
+export const dynamic = 'force-dynamic'; // or: export const revalidate = 0;
+export const runtime = 'edge';          // optional: good for Cloudflare/Workers
 
 export async function GET() {
 

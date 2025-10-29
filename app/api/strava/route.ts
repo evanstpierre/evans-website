@@ -1,8 +1,14 @@
 
-'use server';
+
 // app/api/strava/route.t
 import { NextRequest, NextResponse } from "next/server";
 import { updateEnvVars } from "@/app/utils/updateEnv";
+
+
+export const runtime = "edge";
+export const dynamic = "force-dynamic"; // or: export const revalidate = 0;
+
+
 
 const BASE_URL = "https://www.strava.com/api/v3/";
 const RECENT_CUTOFF = 10;
