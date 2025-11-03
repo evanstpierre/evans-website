@@ -10,14 +10,6 @@ services:
       WATCHPACK_POLLING: "true"
       HOSTNAME: "0.0.0.0"
       NODE_ENV: "development"
-      BASE_URL:
-      STRAVA_CLIENT_ID: ${STRAVA_CLIENT_ID}
-      STRAVA_ATHLETE_ID: ${STRAVA_ATHLETE_ID}
-      STRAVA_CLIENT_SECRET: ${STRAVA_CLIENT_SECRET}
-      STRAVA_ACCESS_TOKEN: ${STRAVA_ACCESS_TOKEN}
-      STRAVA_REFRESH_TOKEN: ${STRAVA_REFRESH_TOKEN}
-      STRAVA_AUTH_CODE: ${STRAVA_AUTH_CODE}
-      STRAVA_EXPIRES_AT: ${STRAVA_EXPIRES_AT}
       MONGODB_URI: ${MONGODB_URI}
       
     volumes:
@@ -36,16 +28,8 @@ services:
     environment:
       NODE_ENV: "production"
       HOSTNAME: "0.0.0.0"
-      PORT: "3000"
-      # Provide only server-side env here (no NEXT_PUBLIC_ secrets)
-      BASE_URL: ${BASE_URL}
-      STRAVA_CLIENT_ID: ${STRAVA_CLIENT_ID}
-      STRAVA_ATHLETE_ID: ${STRAVA_ATHLETE_ID}
-      STRAVA_CLIENT_SECRET: ${STRAVA_CLIENT_SECRET}
-      STRAVA_ACCESS_TOKEN: ${STRAVA_ACCESS_TOKEN}
-      STRAVA_REFRESH_TOKEN: ${STRAVA_REFRESH_TOKEN}
-      STRAVA_AUTH_CODE: ${STRAVA_AUTH_CODE}
-      STRAVA_EXPIRES_AT: ${STRAVA_EXPIRES_AT}
+      PORT: "3000" 
+      MONGODB_URI: ${MONGODB_URI}
     # No volumes in prod; we run the built app
     restart: always
     command: ["npm", "run", "start"]
