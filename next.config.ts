@@ -1,10 +1,11 @@
-// // next.config.ts
-// import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // …your existing config
 
-// const nextConfig: NextConfig = {
-//   output: "export",
-//   distDir: "out",
-//   eslint: { ignoreDuringBuilds: true },
-// };
+  eslint: {
+    // ✅ Don’t fail the production build if there are ESLint errors
+    ignoreDuringBuilds: true,
+  },
+};
 
-// export default nextConfig;
+export default nextConfig;

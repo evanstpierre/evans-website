@@ -2,9 +2,8 @@
   "name": "evans-crazy-website",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "npm@10.8.0",
   "scripts": {
-    "i18n:compile": "paraglide-js compile --project ./src/project.inlang --outdir ./src/paraglide",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -28,7 +27,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@inlang/paraglide-js": "^2.4.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -37,6 +35,6 @@
     "eslint-config-next": "^15.5.6",
     "rimraf": "^6.0.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "5.9.3"
   }
 }

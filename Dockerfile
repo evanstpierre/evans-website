@@ -3,7 +3,7 @@
 # ----------------------
 FROM node:22-alpine AS base
 WORKDIR /app
-ENV NODE_ENV=production
+# don't set NODE_ENV here; each stage will override it
 
 # Use a .dockerignore to avoid copying node_modules/.next, etc.
 
@@ -11,7 +11,7 @@ ENV NODE_ENV=production
 # Dependencies (uses npm ci for reproducible installs)
 # ----------------------
 FROM base AS deps
-ENV NODE_ENV=development
+# NODE_ENV doesn't really matter here; we just install deps
 COPY package*.json ./
 RUN npm ci
 
@@ -31,6 +31,8 @@ CMD ["npm", "run", "dev"]
 # Build (create optimized Next.js build)
 # ----------------------
 FROM deps AS build
+# ✅ For builds, we want a proper production env
+ENV NODE_ENV=production
 # If you need build-time vars, use ARG (avoid putting secrets here)
 # ARG NEXT_PUBLIC_SOMETHING
 COPY . .
@@ -52,7 +54,7 @@ RUN npm ci --omit=dev
 # Copy build output & public assets
 COPY --from=build /app/.next ./.next
 COPY --from=build /app/public ./public
-COPY --from=build /app/next.config.js ./next.config.js
+# no need to copy next.config.*, it's only used at build time
 
 EXPOSE 3000
 CMD ["npm", "run", "start"]
