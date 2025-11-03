@@ -129,13 +129,14 @@ const Albums:string[] = [
                 > <ArrowDropUpIcon sx={{ fontSize: 32, color: "#F2E3DB" }} />
                 </div>
             <div
+       
               ref={scrollRef}
                 className={[
                   "flex flex-col sm:flex-row w-full sm:mt-2 gap-1 no-scrollbar smooth-scroll",
                   // 🧠 desktop scroll only
                   "sm:h-[250px] sm:overflow-y-auto",
                   // 🧠 mobile: always expands, no inner scroll
-                  "overflow-hidden max-h-[775px]",
+                  "overflow-hidden sm:overflow-visible max-h-[800px]",
                 ].join(" ")}
             >
               {isAlbum == 0 && sortedPhotos.map((img) => (
