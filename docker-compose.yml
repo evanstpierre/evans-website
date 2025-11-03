@@ -18,6 +18,8 @@ services:
       STRAVA_REFRESH_TOKEN: ${STRAVA_REFRESH_TOKEN}
       STRAVA_AUTH_CODE: ${STRAVA_AUTH_CODE}
       STRAVA_EXPIRES_AT: ${STRAVA_EXPIRES_AT}
+      MONGODB_URI: ${MONGODB_URI}
+      
     volumes:
       - .:/app
       - /app/node_modules
