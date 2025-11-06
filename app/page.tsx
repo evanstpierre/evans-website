@@ -7,7 +7,7 @@ import Header from './components/Header';
 import Contact from './components/Contact';
 import { useEffect, useState } from 'react';
 
-const DEFAULT_INTRO = "When I’m not learning about computers/math I am probably cycling. I love exploring new places and drinking a nice cup of coffee [preferably a pour over]. I am proud Torontotian who is a passionate Maple Leafs and Blue Jays fan.";
+const DEFAULT_INTRO = "When I’m not learning about computers and math I am probably cycling. I love exploring new places and drinking a nice cup of coffee [preferably a pour over].";
 
 
 export default function Home() {

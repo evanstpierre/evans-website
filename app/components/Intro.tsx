@@ -78,14 +78,14 @@ export default function Intro() {
           loop={0} // set to `Infinity` for infinite loop
           cursor
           cursorStyle="_"
-          typeSpeed={70}
-          deleteSpeed={50}
-          delaySpeed={1500}
+          typeSpeed={120}     // ⬅ slower typing (default ~70)
+          deleteSpeed={60}    // ⬅ slower deleting
+          delaySpeed={2000}   // ⬅ longer pause before next word
         /></p>
 
         <a href="#contact-me" className="flex items-center justify-center w-[75px] h-[40px] bg-[#E86A33] rounded-md cursor-pointer opacity-75 hover:opacity-100">Connect</a>
         <p className="text-md sm:text-l md:text-xl opacity-75">
-        I am a new Grad with a degree in Computer Science Grad who is seeking job opportunities. 
+        I am a University of Waterloo Computer Science alumni who is seeking job opportunities. 
         </p>
       </div>
       <div className=" hidden lg:block rounded-full overflow-hidden ">
