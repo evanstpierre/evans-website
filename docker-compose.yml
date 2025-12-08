@@ -1,11 +1,11 @@
 services:
-  # Local development (kept as-is)
+  # ---------- Local development ----------
   next-dev:
     profiles: ["dev"]
     build:
       context: .
       dockerfile: Dockerfile
-      target: dev        # 👈 use the dev stage
+      target: dev               # uses the `dev` stage we just added
     container_name: next-dev
     environment:
       CHOKIDAR_USEPOLLING: "true"
@@ -16,20 +16,19 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/app
-      - /app/node_modules
+      - .:/app                  # live code from host
+      - /app/node_modules       # keep node_modules inside the container
     restart: always
-    # CMD in Dockerfile dev stage is already `npm run dev`,
-    # so you *could* drop this line, but it's fine to keep:
-    command: ["npm", "run", "dev"]
+    # CMD already set in Dockerfile dev stage, so this is optional:
+    # command: ["npm", "run", "dev"]
 
-
+  # ---------- Production app ----------
   next-prod:
     profiles: ["prod"]
     build:
       context: .
       dockerfile: Dockerfile
-      target: prod       # 👈 use the prod stage
+      target: prod              # uses the `prod` (runner) stage
     container_name: next-prod
     environment:
       HOSTNAME: "0.0.0.0"
@@ -38,13 +37,14 @@ services:
       MONGODB_URI: ${MONGODB_URI}
     restart: always
     expose:
-      - "3000"
-    # optional: for local testing without tunnel, you can add:
-    # ports:
-    #   - "3000:3000"
-    command: ["npm", "run", "start"]
+      - "3000"                  # for other containers (like tunnel)
+    # Let Dockerfile CMD run `node server.js`
+    # so you can drop this:
+    # command: ["npm", "run", "start"]
+    networks:
+      - web                     # 👈 same network as tunnel
 
-
+  # ---------- Cloudflare Tunnel ----------
   tunnel:
     image: cloudflare/cloudflared:latest
     profiles: ["prod"]

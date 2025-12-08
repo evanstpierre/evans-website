@@ -1,60 +1,59 @@
-# ----------------------
-# Base (shared)
-# ----------------------
-FROM node:22-alpine AS base
-WORKDIR /app
-# don't set NODE_ENV here; each stage will override it
+# syntax=docker.io/docker/dockerfile:1
 
-# ----------------------
-# Dependencies (uses npm ci for reproducible installs)
-# ----------------------
+FROM node:20-alpine AS base
+
+# ---------------- deps stage ----------------
 FROM base AS deps
-# Install *all* deps here (dev + prod)
-COPY package*.json ./
-RUN npm ci
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
 
-# ----------------------
-# Dev image (hot reload)
-# ----------------------
-FROM deps AS dev
-ENV NODE_ENV=development \
-    CHOKIDAR_USEPOLLING=true \
-    WATCHPACK_POLLING=true \
-    HOSTNAME=0.0.0.0
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
+RUN \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
 
+# ---------------- builder stage ----------------
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-EXPOSE 3000
-CMD ["npm", "run", "dev"]
 
-# ----------------------
-# Build (create optimized Next.js build)
-# ----------------------
-FROM deps AS build
+RUN \
+  if [ -f yarn.lock ]; then yarn run build; \
+  elif [ -f package-lock.json ]; then npm run build; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
+
+# ---------------- runner / prod stage ----------------
+FROM base AS runner
+WORKDIR /app
+
 ENV NODE_ENV=production
 
-COPY . .
-RUN npm run build
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-# ----------------------
-# ✅ Improved Production runtime (slim)
-# ----------------------
-FROM node:22-alpine AS prod
-WORKDIR /app
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Proper production env
-ENV NODE_ENV=production \
-    HOSTNAME=0.0.0.0 \
-    PORT=3000
-
-# Reuse node_modules from deps (no double npm ci)
-COPY --from=deps /app/node_modules ./node_modules
-
-# Keep package.json for metadata / npm scripts
-COPY package*.json ./
-
-# Copy build output & public assets from build stage
-COPY --from=build /app/.next ./.next
-COPY --from=build /app/public ./public
+USER nextjs
 
 EXPOSE 3000
-CMD ["npm", "run", "start"]
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+CMD ["node", "server.js"]
+
+# Alias for prod stage so compose can target it
+FROM runner AS prod
+
+# Simple dev stage – just Node + deps + default `npm run dev`
+FROM deps AS dev
+WORKDIR /app
+# In dev we don't copy source at build time; we rely on the bind mount
+CMD ["npm", "run", "dev"]

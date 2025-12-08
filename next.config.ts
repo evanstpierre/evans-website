@@ -6,6 +6,7 @@ const nextConfig = {
     // ✅ Don’t fail the production build if there are ESLint errors
     ignoreDuringBuilds: true,
   },
+  output: "standalone",
 };
 
 export default nextConfig;
