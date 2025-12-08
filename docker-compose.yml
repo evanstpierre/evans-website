@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile 
+    target: dev
+    profiles: ["dev"]
     ports:
       - "3000:3000"
     environment:
@@ -23,6 +25,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    target: prod
     profiles: ["prod"]
     environment:
       # let Dockerfile's NODE_ENV=production stand, or be explicit:
