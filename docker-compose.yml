@@ -1,49 +1,49 @@
 services:
   # Local development (kept as-is)
-  next:
+  next-dev:
+    profiles: ["dev"]
     build:
       context: .
-      dockerfile: Dockerfile 
-    target: dev
-    profiles: ["dev"]
-    ports:
-      - "3000:3000"
+      dockerfile: Dockerfile
+      target: dev        # 👈 use the dev stage
+    container_name: next-dev
     environment:
       CHOKIDAR_USEPOLLING: "true"
       WATCHPACK_POLLING: "true"
       HOSTNAME: "0.0.0.0"
-      NODE_ENV: "development"      # or just delete this line entirely
-      MONGODB_URI: ${MONGODB_URI}
+      NODE_ENV: "development"
+      MONGO_URI: ${MONGO_URI}
+    ports:
+      - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
     restart: always
+    # CMD in Dockerfile dev stage is already `npm run dev`,
+    # so you *could* drop this line, but it's fine to keep:
     command: ["npm", "run", "dev"]
 
-  # Production Next.js app (no public ports)
+
   next-prod:
+    profiles: ["prod"]
     build:
       context: .
       dockerfile: Dockerfile
-    target: prod
-    profiles: ["prod"]
+      target: prod       # 👈 use the prod stage
+    container_name: next-prod
     environment:
-      # let Dockerfile's NODE_ENV=production stand, or be explicit:
-      NODE_ENV: "production"
       HOSTNAME: "0.0.0.0"
+      NODE_ENV: "production"
       PORT: "3000"
-      MONGODB_URI: ${MONGODB_URI}
+      MONGO_URI: ${MONGO_URI}
+    restart: always
     expose:
       - "3000"
-    restart: always
+    # optional: for local testing without tunnel, you can add:
+    # ports:
+    #   - "3000:3000"
     command: ["npm", "run", "start"]
-    healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://localhost:3000').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
-      interval: 20s
-      timeout: 5s
-      retries: 5
-    networks:
-      - web
+
 
   tunnel:
     image: cloudflare/cloudflared:latest
