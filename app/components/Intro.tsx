@@ -67,9 +67,8 @@ export default function Intro() {
   }, []);
 
   return (
-    <div className="w-full  max-h-[500px] text-[#F2E3DB] flex
-      flex-row justify-between ">
-      <div className="flex flex-col gap-y-3 max-w-[500px]">
+    <div className="flex w-full max-w-[850px] items-center justify-between gap-x-8 text-[#F2E3DB]">
+      <div className="flex min-w-0 max-w-[500px] flex-col gap-y-3">
         <div className="text-3xl ">
           Hi my name is, Evan St Pierre
         </div>
@@ -88,13 +87,13 @@ export default function Intro() {
         I am a University of Waterloo Computer Science alumni who is seeking job opportunities. 
         </p>
       </div>
-      <div className=" hidden lg:block rounded-full overflow-hidden ">
+      <div className="hidden h-[200px] w-[200px] shrink-0 overflow-hidden rounded-full lg:block">
         <Image 
         src={'/avatar/happy.png'}
         alt={"A smiling avatar of Evan St Pierre" }
         width={200}
         height={200}
-        style={{ objectFit: 'cover' }}
+        className="h-full w-full object-contain"
         />
       </div>
     </div>
