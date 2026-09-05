@@ -1,81 +1,38 @@
-import Image from 'next/image'
- 
- 
-// TODO:
+import Image from 'next/image';
+import { experiences } from '@/app/data/experiences';
 
-
-const experiences = [
-  {
-    title: "Software Developer Intern | Searchspring",
-    year: "2022",
-    description: "Worked on the client portal.",
-    icon: "/icons/searchspring.png",
-  },
-  {
-    title: "Software Developer Intern | MarshMclennan",
-    year: "2021",
-    description:
-      "Led morning scrum. Developed test for COVID-19 check-in application and built frontend component for the finance portal.",
-    icon: "/icons/MMC.png",
-  },
-  // Add more objects here...
-];
-
-export default function Timeline(){
-    return (
-        <div className="max-w-[850px] flex  items-start justify-start">
-
-            <div className='w-1 h-70 bg-[#F2E3DB] relative mx-10 '>
-                <div className="w-13 h-13 rounded-full bg-[#F2E3DB] overflow-hidden flex items-center justify-center absolute top-0 left-1/2 -translate-x-1/2">
-                <div className="rounded-full overflow-hidden ">
-                    <Image
-                        src="/icons/searchspring.png"
-                        alt="Searchspring Icon"
-                        width={43}
-                        height={43}
-                        className="object-cover"
-                        />
-                    </div>
-                </div>
-
-                <div className="w-13 h-13 rounded-full bg-[#F2E3DB] overflow-hidden flex items-center justify-center absolute top-35 left-1/2 -translate-x-1/2 ">
-                        <Image
-                        src="/icons/MMC.png"
-                        alt="MarshMcClennan Icon"
-                        width={40}
-                        height={40}
-                        />
-                </div>
+export default function Timeline() {
+  return (
+    <ol className="w-full max-w-[850px]">
+      {experiences.map((experience) => (
+        <li
+          key={experience.id}
+          className="group relative grid grid-cols-[52px_minmax(0,1fr)] gap-x-4 sm:grid-cols-[84px_minmax(0,1fr)] sm:gap-x-2"
+        >
+          <div className="relative flex justify-center">
+            <div
+              aria-hidden="true"
+              className="absolute top-0 bottom-0 left-1/2 w-1 -translate-x-1/2 bg-[#F2E3DB]"
+            />
+            <div className="relative flex h-13 w-13 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#F2E3DB]">
+              <Image
+                src={experience.icon}
+                alt={`${experience.company} logo`}
+                width={experience.iconSize ?? 43}
+                height={experience.iconSize ?? 43}
+                className={experience.uncroppedIcon ? 'object-contain' : 'rounded-full object-contain'}
+              />
             </div>
-
-            <div className='max-w-100 opacity-75'>
-                <div className='h-30'>
-                    <div>
-                        Software Developer Intern | Searchspring
-                    </div>
-                    <div>
-                        2022
-                    </div>
-                    <p className='mx-3'>
-                    Worked on the client portal.  
-                    </p>
-
-                </div>
-                <div className='h-30  mt-5  '>
-                    <div>
-                        Software Developer Intern | MarshMclennan
-                    </div>
-                    <div>
-                        2021
-                    </div>
-                    <p className='mx-3'>
-                    Led morning scrum. Developed test for COVID-19 check-in application and built frontend component for the finance portal.
-                    </p>
-                    
-                </div>
-            </div>
-            
-            
-        </div>
-    );
+          </div>
+          <div className="min-w-0 max-w-100 pb-10 opacity-75 group-last:pb-0 sm:min-h-35 sm:group-last:min-h-0">
+            <h2>{experience.role} | {experience.company}</h2>
+            <p>{experience.period}</p>
+            {experience.description && (
+              <p className="mt-1 sm:mx-3">{experience.description}</p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
 }
