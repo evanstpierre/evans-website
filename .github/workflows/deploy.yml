@@ -1,0 +1,74 @@
+name: Publish and deploy production
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Validate deployment configuration
+        env:
+          APP_IMAGE: ghcr.io/evanstpierre/evans-website@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        run: |
+          bash -n scripts/deploy.sh
+          python3 -m unittest discover -s tests -v
+          docker compose --profile dev config --quiet
+          docker compose -f docker-compose.prod.yml --profile prod config --quiet
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        id: build
+        with:
+          context: .
+          target: prod
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/evanstpierre/evans-website:sha-${{ github.sha }}
+          labels: org.opencontainers.image.source=https://github.com/${{ github.repository }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Deploy immutable image over SSH
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT || '22' }}
+          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+          DEPLOY_PROJECT: ${{ vars.DEPLOY_COMPOSE_PROJECT }}
+          DIGEST: ${{ steps.build.outputs.digest }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ $DEPLOY_HOST =~ ^[a-zA-Z0-9.-]+$ ]]
+          [[ $DEPLOY_USER =~ ^[a-zA-Z0-9_-]+$ ]]
+          [[ $DEPLOY_PORT =~ ^[0-9]+$ ]]
+          [[ $DEPLOY_PATH =~ ^/[a-zA-Z0-9_./-]+$ ]]
+          [[ $DEPLOY_PROJECT =~ ^[a-z0-9][a-z0-9_-]*$ ]]
+          umask 077
+          ssh_dir=$(mktemp -d)
+          trap 'rm -rf "$ssh_dir"' EXIT
+          printf '%s\n' "$SSH_KEY" > "$ssh_dir/key"
+          printf '%s\n' "$KNOWN_HOSTS" > "$ssh_dir/known_hosts"
+          ssh_opts=(-i "$ssh_dir/key" -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$ssh_dir/known_hosts" -o ConnectTimeout=15 -p "$DEPLOY_PORT")
+          remote="$DEPLOY_USER@$DEPLOY_HOST"
+          upload="$DEPLOY_PATH/incoming-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          ssh "${ssh_opts[@]}" "$remote" "umask 077; mkdir -p '$upload'"
+          tar -cf - scripts/deploy.sh docker-compose.prod.yml | ssh "${ssh_opts[@]}" "$remote" "tar -xf - -C '$upload'"
+          ssh "${ssh_opts[@]}" "$remote" "bash '$upload/scripts/deploy.sh' 'ghcr.io/evanstpierre/evans-website@$DIGEST' '$DEPLOY_PATH' '$DEPLOY_PROJECT' '$upload/docker-compose.prod.yml'"

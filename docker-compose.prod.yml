@@ -1,0 +1,43 @@
+services:
+  # ---------- Production app ----------
+  next-prod:
+    profiles: ["prod"]
+    image: ${APP_IMAGE:?APP_IMAGE must be an immutable image reference}
+    healthcheck:
+      test: ["CMD", "node", "-e", "const r = require('http').get('http://127.0.0.1:3000/', res => { res.resume(); process.exit(res.statusCode === 200 ? 0 : 1); }); r.on('error', () => process.exit(1)); r.setTimeout(4000, () => { r.destroy(); process.exit(1); });"]
+      interval: 5s
+      timeout: 5s
+      start_period: 30s
+      retries: 12
+    container_name: next-prod
+    environment:
+      HOSTNAME: "0.0.0.0"
+      NODE_ENV: "production"
+      PORT: "3000"
+      MONGODB_URI: ${MONGODB_URI}
+    restart: always
+    expose:
+      - "3000"                  # for other containers (like tunnel)
+    # Let Dockerfile CMD run `node server.js`
+    # so you can drop this:
+    # command: ["npm", "run", "start"]
+    networks:
+      - web                     # 👈 same network as tunnel
+
+  # ---------- Cloudflare Tunnel ----------
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    profiles: ["prod"]
+    depends_on:
+      - next-prod
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    command: >
+      tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
+    restart: always
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
