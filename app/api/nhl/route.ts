@@ -5,8 +5,9 @@ export const runtime = 'edge';          // optional: good for Cloudflare/Workers
 
 export async function GET() {
 
-  const date = new Date();
-  date.setDate(date.getDate() - 7);
+  const now = Date.now();
+  const cutoff = now - 7 * 24 * 60 * 60 * 1000;
+  const date = new Date(cutoff);
   const formattedDate = date.toISOString().split('T')[0];
   const apiUrl = `https://api-web.nhle.com/v1/club-schedule/TOR/week/${formattedDate}`;
   const response = await fetch(apiUrl);
@@ -30,17 +31,16 @@ export async function GET() {
 
   const lastGame =
   data.games
-    ?.filter((game: any) => game.gameState === 'OFF')
-    .reduce((latest: any, current: any) =>
-      new Date(current.gameDate) > new Date(latest.gameDate) ? current : latest
-    );
+    ?.filter((game: any) => {
+      const startTime = Date.parse(game.startTimeUTC);
+      return (game.gameState === 'OFF' || game.gameState === 'FINAL')
+        && startTime >= cutoff && startTime <= now;
+    })
+    .sort((a: any, b: any) => Date.parse(b.startTimeUTC) - Date.parse(a.startTimeUTC))[0];
 
     if (!lastGame) {
       console.log('❌ No completed games found.');
-      // TODO: return something notifying webpage that there is no game.
-      return new Response(JSON.stringify({ }), {
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return new Response(null, { status: 204 });
     }
     const leafsId = 10;
     const isLeafsHome = lastGame.homeTeam.id === leafsId;
@@ -67,4 +67,3 @@ export async function GET() {
     headers: { 'Content-Type': 'application/json' },
   });
 }
-

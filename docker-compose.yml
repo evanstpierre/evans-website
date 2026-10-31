@@ -6,7 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile
       target: dev               # uses the `dev` stage we just added
-    container_name: next-dev
     environment:
       CHOKIDAR_USEPOLLING: "true"
       WATCHPACK_POLLING: "true"
@@ -14,7 +13,7 @@ services:
       NODE_ENV: "development"
       MONGODB_URI: ${MONGODB_URI}
     ports:
-      - "3000:3000"
+      - "${DEV_PORT:-3000}:3000"
     volumes:
       - .:/app                  # live code from host
       - /app/node_modules       # keep node_modules inside the container
